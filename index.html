@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>艾彩原创vk视频-成人向原创短片目录与观看指南</title>
+<meta name="description" content="艾彩原创vk视频是面向成年观众的原创短片目录，收录剧情短片、角色演绎、短片合集与幕后访谈，提供分级提示、时长标注与更新记录，帮助按题材、时长与制作团队快速定位条目。">
+<meta name="keywords" content="艾彩原创vk视频">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f1a2e'/%3E%3Cpath d='M10 8h12v4H14v4h7v4h-7v4h-2z' fill='%23f2b544'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"艾彩原创vk视频","description":"成年向原创短片目录，含分级提示、时长标注与更新记录。","inLanguage":"zh-CN"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"艾彩原创vk视频条目为什么标注时长区间？","acceptedAnswer":{"@type":"Answer","text":"短片分12—18分钟、25—40分钟、45分钟以上三档，标注区间是因为同一合集内的分集长度会相差5到8分钟，精确到秒反而误导。"}},
+{"@type":"Question","name":"角色演绎类短片的演员署名怎么核对？","acceptedAnswer":{"@type":"Answer","text":"条目页头部列出演员名与角色名，末尾演职员表再列一次；两处不一致时以末尾演职员表为准，因为片尾在成片后录入。"}},
+{"@type":"Question","name":"合集条目的拆分规则是什么？","acceptedAnswer":{"@type":"Answer","text":"30分钟内、场景连续的分集归入同一合集；跨场景且人物线独立的直接拆为单集，合集页只保留索引与总时长。"}},
+{"@type":"Question","name":"幕后访谈与正片的关系如何处理？","acceptedAnswer":{"@type":"Answer","text":"访谈单列为独立条目，不与正片合并播放；正片条目页底部给出访谈链接，访谈不重复正片剧情。"}},
+{"@type":"Question","name":"分级提示依据什么标准？","acceptedAnswer":{"@type":"Answer","text":"按裸露程度、暴力镜头和语言强度三项各打一档，三项合并给出整体提示，不设单一总分。"}}
+]}
+</script>
+<style>
+:root{
+--ink:#1f1a2e;
+--ink-2:#3c3352;
+--muted:#6f6683;
+--line:#ddd6e8;
+--bg:#f7f4fb;
+--card:#ffffff;
+--brand:#7b3fa0;
+--brand-2:#c0267a;
+--gold:#f2b544;
+--teal:#1d7a72;
+--radius:14px;
+--radius-s:8px;
+--sh:0 2px 10px rgba(45,28,70,.07);
+--sh-h:0 6px 18px rgba(45,28,70,.13);
+--sp:clamp(16px,2.2vw,28px);
+--fs-h1:clamp(28px,4.2vw,44px);
+--fs-h2:clamp(21px,2.4vw,28px);
+--fs-h3:17px;
+--fs-body:16px;
+--fs-s:14px;
+--maxw:1180px;
+--annc-h:38px;
+--head-h:62px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--annc-h) + var(--head-h) + 14px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;font-size:var(--fs-body);line-height:1.78;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{line-height:1.34;margin:0 0 .6em}
+p{margin:0 0 1em}
+ul,ol{margin:0 0 1em;padding-left:1.3em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--sp)}
+:focus-visible{outline:3px solid var(--brand-2);outline-offset:2px;border-radius:4px}
+/* 公告条 */
+.annc{position:sticky;top:0;z-index:60;background:linear-gradient(90deg,var(--ink),var(--ink-2));color:#f3eefb;font-size:13px}
+.annc .wrap{display:flex;gap:12px;align-items:center;min-height:var(--annc-h);flex-wrap:wrap}
+.annc b{color:var(--gold)}
+.annc a{color:#ffd9ee;font-weight:600}
+/* 页头 */
+.header{position:sticky;top:var(--annc-h);z-index:55;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.header .wrap{display:flex;align-items:center;gap:18px;min-height:var(--head-h);flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:.2px;color:var(--ink)}
+.brand:hover{text-decoration:none}
+.brand svg{flex:none}
+.nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:6px}
+.nav a{color:var(--ink-2);font-size:14.5px;padding:6px 10px;border-radius:999px}
+.nav a:hover{background:#f0e8f8;text-decoration:none}
+.head-tools{margin-left:auto;display:flex;align-items:center;gap:10px}
+.search{display:flex;align-items:center;gap:6px;background:#f2eefa;border:1px solid var(--line);border-radius:999px;padding:4px 6px 4px 12px}
+.search input{border:0;background:transparent;font:inherit;font-size:14px;width:150px;color:var(--ink);outline:none}
+.search button{border:0;background:var(--brand);color:#fff;font:inherit;font-size:13px;padding:5px 12px;border-radius:999px;cursor:pointer}
+.menu-btn{display:none;border:1px solid var(--line);background:#fff;border-radius:var(--radius-s);padding:7px 12px;font:inherit;font-size:14px;cursor:pointer}
+.search-msg{font-size:13px;color:var(--brand-2);padding:0 4px 6px;display:none}
+/* 首屏 */
+.hero{background:
+ radial-gradient(900px 340px at 88% -10%,rgba(192,38,122,.16),transparent 60%),
+ radial-gradient(700px 320px at -8% 110%,rgba(123,63,160,.18),transparent 62%),
+ #fff;
+ border-bottom:1px solid var(--line);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(20px,4vw,54px);padding-top:clamp(28px,4vw,52px);padding-bottom:clamp(28px,4vw,52px);align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--teal);background:#e5f4f2;border:1px solid #c6e6e2;padding:4px 12px;border-radius:999px;margin-bottom:14px}
+.hero h1{font-size:var(--fs-h1);letter-spacing:.5px;margin-bottom:14px}
+.hero p.lead{font-size:16.5px;color:var(--ink-2);max-width:56ch}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px}
+.btn{display:inline-block;padding:11px 20px;border-radius:999px;font-weight:700;font-size:15px;border:1px solid transparent;transition:transform .18s ease,box-shadow .18s ease}
+.btn:hover{text-decoration:none;transform:translateY(-2px);box-shadow:var(--sh-h)}
+.btn-main{background:linear-gradient(120deg,var(--brand),var(--brand-2));color:#fff}
+.btn-ghost{border-color:var(--line);color:var(--ink-2);background:#fff}
+.hero-stats{display:flex;gap:22px;margin-top:24px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+.hero-stats b{display:block;font-size:20px;color:var(--ink);font-family:Georgia,serif}
+/* 首屏构图 */
+.art{position:relative;min-height:300px}
+.art .card-a,.art .card-b,.art .card-c{position:absolute;border-radius:var(--radius);box-shadow:var(--sh-h);border:1px solid var(--line)}
+.art .card-a{inset:0 18% 34% 4%;background:linear-gradient(150deg,#2c2144,#7b3fa0 70%);color:#fff;padding:16px}
+.art .card-a .k{font-size:12px;opacity:.8;letter-spacing:2px}
+.art .card-a .t{font-weight:800;font-size:19px;margin-top:6px}
+.art .card-a .m{font-size:12.5px;opacity:.88;margin-top:8px}
+.art .card-b{right:0;top:26%;width:46%;height:44%;background:#fff;padding:12px;display:flex;flex-direction:column;gap:6px}
+.art .card-b .bar{height:9px;border-radius:5px;background:#eee5f6}
+.art .card-b .bar:nth-child(1){width:82%;background:var(--gold)}
+.art .card-b .bar:nth-child(2){width:64%}
+.art .card-b .bar:nth-child(3){width:74%}
+.art .card-b .bar:nth-child(4){width:44%}
+.art .card-c{left:10%;bottom:0;width:56%;height:30%;background:#fff;border-left:5px solid var(--brand-2);padding:10px 12px;font-size:12.5px;color:var(--muted)}
+.art .card-c b{color:var(--ink);font-size:14px}
+/* 布局 */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 286px;gap:clamp(20px,3vw,36px);padding-top:clamp(24px,3.4vw,42px);padding-bottom:48px;align-items:start}
+main{min-width:0}
+aside{position:sticky;top:calc(var(--annc-h) + var(--head-h) + 16px)}
+.section{margin-bottom:clamp(28px,3.6vw,46px);scroll-margin-top:calc(var(--annc-h) + var(--head-h) + 16px)}
+.section>h2{font-size:var(--fs-h2);display:flex;align-items:center;gap:10px}
+.section>h2::before{content:"";width:6px;height:22px;border-radius:3px;background:linear-gradient(180deg,var(--brand),var(--brand-2));flex:none}
+.sec-note{color:var(--muted);font-size:14px;margin:-.2em 0 1.1em}
+/* 卡片 */
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--sh);transition:transform .18s ease,box-shadow .18s ease}
+.card:hover{transform:translateY(-3px);box-shadow:var(--sh-h)}
+.card h3{font-size:var(--fs-h3);margin-bottom:6px}
+.card .meta{font-size:12.5px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.card p{font-size:14.5px;color:var(--ink-2);margin-bottom:8px}
+.tagrow{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:12px;background:#f2eefa;border:1px solid #e2d8ef;color:var(--ink-2);padding:2px 9px;border-radius:999px}
+.tag.gold{background:#fdf3dc;border-color:#f2dfae;color:#7a5a10}
+.tag.teal{background:#e5f4f2;border-color:#c6e6e2;color:#155f59}
+/* 列表 */
+.list{border:1px solid var(--line);border-radius:var(--radius);background:#fff;overflow:hidden}
+.list li{list-style:none;display:flex;gap:14px;padding:12px 16px;border-bottom:1px solid #eee9f5;font-size:14.5px;align-items:baseline}
+.list li:last-child{border-bottom:0}
+.list li time{flex:none;color:var(--brand);font-size:13px;font-variant-numeric:tabular-nums;width:66px}
+.list li b{font-weight:700}
+.list li span{color:var(--muted);font-size:13px}
+/* 频道索引 */
+.channels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.channels a{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--radius-s);padding:11px 12px;font-size:14px;color:var(--ink-2);transition:border-color .15s}
+.channels a:hover{border-color:var(--brand);text-decoration:none;color:var(--brand)}
+.channels a small{display:block;color:var(--muted);font-size:12px}
+/* 深度解析 */
+.article{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,3vw,32px);box-shadow:var(--sh)}
+.article h3{font-size:var(--fs-h3);margin-top:1.4em;padding-top:.9em;border-top:1px dashed var(--line)}
+.article h3:first-of-type{margin-top:.3em;border-top:0;padding-top:0}
+.article ul{padding-left:1.15em}
+.article li{margin-bottom:.45em}
+.quote{border-left:4px solid var(--gold);background:#fdfaf1;padding:12px 16px;border-radius:0 var(--radius-s) var(--radius-s) 0;margin:1em 0;font-size:14.5px;color:var(--ink-2)}
+.factbox{background:#f2eefa;border:1px solid #e2d8ef;border-radius:var(--radius-s);padding:14px 16px;font-size:14px;margin:1em 0}
+.factbox b{color:var(--brand)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:1em 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f6f1fb;font-weight:700}
+/* 步骤 */
+.steps{counter-reset:s;list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.steps li{counter-increment:s;position:relative;padding:12px 16px 12px 54px;background:#fff;border:1px solid var(--line);border-radius:var(--radius-s);font-size:14.5px}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+/* 对照 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.panel{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;background:#fff}
+.panel h4{font-size:15px;margin-bottom:8px}
+.panel.a{border-top:4px solid var(--brand)}
+.panel.b{border-top:4px solid var(--teal)}
+.panel ul{margin:0;padding-left:1.1em;font-size:14px;color:var(--ink-2)}
+/* FAQ */
+details{background:#fff;border:1px solid var(--line);border-radius:var(--radius-s);margin-bottom:10px;overflow:hidden}
+summary{cursor:pointer;padding:13px 42px 13px 16px;font-weight:700;font-size:15px;position:relative;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--brand);font-size:19px;font-weight:400}
+details[open] summary::after{content:"–"}
+details p{margin:0;padding:0 16px 14px;font-size:14.5px;color:var(--ink-2)}
+/* 评论 */
+.cmts{display:grid;gap:12px}
+.cmt{background:#fff;border:1px solid var(--line);border-radius:var(--radius-s);padding:13px 16px}
+.cmt .who{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--muted);margin-bottom:6px}
+.cmt .who b{color:var(--ink)}
+.cmt .who .av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex:none}
+.cmt p{font-size:14.5px;margin:0;color:var(--ink-2)}
+.cmt .score{color:var(--gold);font-size:13px}
+/* 时间线 */
+.tl{list-style:none;padding:0;margin:0;border-left:2px solid #e2d8ef;margin-left:8px}
+.tl li{position:relative;padding:0 0 18px 22px;font-size:14.5px}
+.tl li::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--brand)}
+.tl time{color:var(--brand);font-size:13px;display:block}
+/* 榜单 */
+.rank{list-style:none;counter-reset:r;padding:0;margin:0;display:grid;gap:10px}
+.rank li{counter-increment:r;display:flex;gap:14px;align-items:baseline;background:#fff;border:1px solid var(--line);border-radius:var(--radius-s);padding:11px 14px;font-size:14.5px}
+.rank li::before{content:counter(r);font-family:Georgia,serif;font-size:20px;color:var(--gold);font-weight:700;flex:none;width:26px}
+.rank li b{font-weight:700}
+.rank li span{color:var(--muted);font-size:13px;display:block}
+/* 标签索引 */
+.tags-index{display:flex;flex-wrap:wrap;gap:8px}
+.tags-index a{font-size:13.5px;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--ink-2)}
+.tags-index a:hover{border-color:var(--brand-2);color:var(--brand-2);text-decoration:none}
+/* 侧栏 */
+.side-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px;box-shadow:var(--sh)}
+.side-card h3{font-size:15px;margin-bottom:10px}
+.side-nav{list-style:none;padding:0;margin:0;font-size:14px}
+.side-nav a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink-2);border-left:3px solid transparent}
+.side-nav a:hover{background:#f6f1fb;text-decoration:none}
+.side-nav a.active{background:#f2eefa;border-left-color:var(--brand);color:var(--brand);font-weight:700}
+.side-card .mini{font-size:13px;color:var(--muted);margin:0}
+/* 页尾 */
+.footer{background:var(--ink);color:#c9c0da;font-size:13.5px;padding:38px 0 26px;margin-top:20px}
+.footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:26px}
+.footer h4{color:#fff;font-size:14px;margin-bottom:10px}
+.footer a{color:#d6cde6;display:block;padding:3px 0;font-size:13.5px}
+.footer a:hover{color:#fff}
+.footer .brand-f{color:#fff;font-weight:800;font-size:16px;display:flex;gap:9px;align-items:center;margin-bottom:8px}
+.footer p{margin:0 0 8px;line-height:1.7}
+.foot-bottom{border-top:1px solid #3a3150;margin-top:26px;padding-top:16px;font-size:12.5px;color:#9a90b1;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+/* 回到顶部 */
+#toTop{position:fixed;right:18px;bottom:18px;z-index:50;border:0;border-radius:50%;width:44px;height:44px;background:var(--brand);color:#fff;font-size:17px;cursor:pointer;box-shadow:var(--sh-h);opacity:0;pointer-events:none;transition:opacity .2s}
+#toTop.show{opacity:1;pointer-events:auto}
+/* 响应式 */
+@media(max-width:960px){
+ .layout{grid-template-columns:1fr}
+ aside{position:static;margin-top:8px}
+ .hero .wrap{grid-template-columns:1fr}
+ .art{min-height:260px;margin-top:8px}
+ .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .channels{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .footer .wrap{grid-template-columns:1fr 1fr}
+}
+@media(max-width:680px){
+ .nav{display:none;width:100%;flex-direction:column;gap:2px;padding:6px 0 10px}
+ .nav.open{display:flex}
+ .menu-btn{display:inline-block;margin-left:auto}
+ .head-tools{order:5;width:100%;margin:0 0 10px}
+ .search{flex:1}
+ .search input{width:100%}
+ .g3,.g2,.compare,.channels{grid-template-columns:1fr}
+ .channels{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .footer .wrap{grid-template-columns:1fr}
+ .hero-stats{gap:16px}
+ #toTop{bottom:14px;right:12px;width:40px;height:40px}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *{transition:none!important;animation:none!important}
+ .card:hover,.btn:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="annc" id="annc">
+  <div class="wrap">
+    <span><b>艾彩原创vk视频</b> 目录更新：11月7日新增《夜行巴士·第3集》与幕后访谈，共 8 条记录。</span>
+    <a href="/#latest">查看更新</a>
+  </div>
+</div>
+
+<header class="header" id="top">
+  <div class="wrap">
+    <a class="brand" href="/#top" aria-label="艾彩原创vk视频 首页">
+      <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#1f1a2e"/>
+        <path d="M9 8h13v3.6H13v3.2h7v3.6h-7v6h-4z" fill="#f2b544"/>
+        <circle cx="24.5" cy="22.5" r="3.5" fill="#c0267a"/>
+      </svg>
+      艾彩原创vk视频
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">栏目菜单</button>
+    <nav class="nav" id="nav" aria-label="主题导航">
+      <a href="/#overview">领域概览</a>
+      <a href="/#pick">精选推荐</a>
+      <a href="/#latest">最新更新</a>
+      <a href="/#channels">分类入口</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">常见问题</a>
+      <a href="/#comments">观众评论</a>
+    </nav>
+    <div class="head-tools">
+      <form class="search" role="search" id="searchForm" onsubmit="return false;">
+        <label for="q" class="visually-hidden" style="position:absolute;left:-9999px">站内查找</label>
+        <input id="q" type="search" placeholder="查找条目名或演员" autocomplete="off">
+        <button type="submit" id="searchBtn">查找</button>
+      </form>
+    </div>
+  </div>
+  <div class="wrap"><div class="search-msg" id="searchMsg" role="status" aria-live="polite"></div></div>
+</header>
+
+<section class="hero" aria-label="主题首屏">
+  <div class="wrap">
+    <div>
+      <span class="hero-tag">成年观众 · 分级提示 · 原创短片目录</span>
+      <h1>艾彩原创vk视频</h1>
+      <p class="lead">收录剧情短片、角色演绎、短片合集与幕后访谈四类内容，条目页给出裸露、暴力、语言三项分级提示与时长区间，方便按题材和制作团队定位想看的那一支。</p>
+      <div class="hero-cta">
+        <a class="btn btn-main" href="/#pick">看本周精选</a>
+        <a class="btn btn-ghost" href="/#channels">按题材浏览</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>186</b>收录条目</div>
+        <div><b>11</b>题材频道</div>
+        <div><b>5</b>制作团队署名</div>
+        <div><b>11/07</b>最近一次更新</div>
+      </div>
+    </div>
+    <div class="art" aria-hidden="true">
+      <div class="card-a">
+        <div class="k">EP.03 / 分集</div>
+        <div class="t">夜行巴士</div>
+        <div class="m">32 分 · 剧情短片 · 三位演员署名</div>
+      </div>
+      <div class="card-b">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      </div>
+      <div class="card-c"><b>分级提示</b><br>裸露 A · 暴力 B · 语言 B</div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="layout">
+    <main>
+
+      <section class="section" id="overview">
+        <h2>领域概览：原创短片目录怎么分类</h2>
+        <p class="sec-note">目录按“题材频道 × 时长档 × 制作团队”三条轴切分，同一支短片只在主频道出现一次，跨题材的以标签补充。</p>
+        <div class="grid g3">
+          <article class="card">
+            <h3>剧情短片</h3>
+            <div class="meta"><span>86 条</span><span>12—40 分钟</span></div>
+            <p>有完整起承转合，场景通常三到五个。多数条目在片头两分钟内交代人物关系，适合先看简介再决定。</p>
+            <div class="tagrow"><span class="tag">都市夜归</span><span class="tag">合租故事</span></div>
+          </article>
+          <article class="card">
+            <h3>角色演绎</h3>
+            <div class="meta"><span>52 条</span><span>18—35 分钟</span></div>
+            <p>以固定角色设定为核心，演员署名与角色名同时列出。系列内角色名不变，演员可能轮换。</p>
+            <div class="tagrow"><span class="tag">侦探助手</span><span class="tag">酒吧老板</span></div>
+          </article>
+          <article class="card">
+            <h3>短片合集</h3>
+            <div class="meta"><span>31 条</span><span>45 分钟以上</span></div>
+            <p>按主题打包三到五支短片，合集页只保留索引与总时长，单集时长在分集说明里各自标注。</p>
+            <div class="tagrow"><span class="tag">午夜三题</span><span class="tag">雨天集合</span></div>
+          </article>
+          <article class="card">
+            <h3>幕后访谈</h3>
+            <div class="meta"><span>17 条</span><span>8—20 分钟</span></div>
+            <p>导演、摄影或演员的单人访谈，单独列为条目，不与正片合并播放，避免破坏观看节奏。</p>
+            <div class="tagrow"><span class="tag">摄影谈</span><span class="tag">角色准备</span></div>
+          </article>
+          <article class="card">
+            <h3>时长分档</h3>
+            <div class="meta"><span>三档</span><span>区间标注</span></div>
+            <p>12—18 分钟、25—40 分钟、45 分钟以上。同一合集内分集常相差 5 到 8 分钟，标区间比标秒数更可靠。</p>
+          </article>
+          <article class="card">
+            <h3>分级三项</h3>
+            <div class="meta"><span>A/B/C 三档</span><span>不设总分</span></div>
+            <p>裸露、暴力、语言各打一档，分项列出。三项分开读，比一个笼统的“限制级”更能对应实际内容。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="pick">
+        <h2>精选内容推荐：本周值得先看的五支</h2>
+        <p class="sec-note">选取依据是剪辑完整度、演员署名齐全度与条目说明的具体程度，不含播放量数据。</p>
+        <div class="grid g2">
+          <article class="card">
+            <h3>夜行巴士·第 3 集</h3>
+            <div class="meta"><span>剧情短片</span><span>32 分钟</span><span>11/07 更新</span></div>
+            <p>末班车上的三组乘客，剧本把对话压在同一个车厢内完成。第 3 集换了视角人物，前两集的伏笔在这里收束。</p>
+            <div class="tagrow"><span class="tag gold">本周主推</span><span class="tag">都市夜归</span></div>
+          </article>
+          <article class="card">
+            <h3>天台的风向标</h3>
+            <div class="meta"><span>剧情短片</span><span>27 分钟</span><span>10/29 更新</span></div>
+            <p>两人夜谈的单一场景短片，摄影用了大量手持跟拍。条目页附 4 张分镜手稿，能看到成片删掉的一段楼梯戏。</p>
+            <div class="tagrow"><span class="tag">合租故事</span><span class="tag teal">附分镜</span></div>
+          </article>
+          <article class="card">
+            <h3>侦探助手·雨夜篇</h3>
+            <div class="meta"><span>角色演绎</span><span>34 分钟</span><span>11/02 更新</span></div>
+            <p>系列第七支，角色名与演员署名两处一致。暴雨夜的取证段落拍了 11 分钟长镜头，是本系列目前最长的一条。</p>
+            <div class="tagrow"><span class="tag">侦探助手</span><span class="tag">长镜头</span></div>
+          </article>
+          <article class="card">
+            <h3>午夜三题·合集</h3>
+            <div class="meta"><span>短片合集</span><span>合计 61 分钟</span><span>10/24 更新</span></div>
+            <p>三支短片共用一间旧公寓，人物互不相识。合集页按播放顺序排列，分集说明各自标了时长与分级三项。</p>
+            <div class="tagrow"><span class="tag gold">合集</span><span class="tag">旧公寓</span></div>
+          </article>
+          <article class="card">
+            <h3>摄影指导谈低照度</h3>
+            <div class="meta"><span>幕后访谈</span><span>16 分钟</span><span>10/31 更新</span></div>
+            <p>谈夜戏打光的取舍，提到把主光压到 3200K 以下后的肤色处理。访谈里出现的灯位图与正片画面对应得上。</p>
+            <div class="tagrow"><span class="tag teal">访谈</span><span class="tag">低照度</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="latest">
+        <h2>最新更新：近两周条目变动</h2>
+        <ul class="list">
+          <li><time>11/07</time><div><b>夜行巴士·第 3 集</b> 上线 <span>· 32 分钟 · 剧情短片 · 演员署名 3 人</span></div></li>
+          <li><time>11/07</time><div><b>夜行巴士·幕后访谈</b> 上线 <span>· 14 分钟 · 谈车厢内布光</span></div></li>
+          <li><time>11/05</time><div><b>雨天集合</b> 补入第 4 支短片 <span>· 合集总时长改为 58 分钟</span></div></li>
+          <li><time>11/03</time><div><b>侦探助手·雨夜篇</b> 修正演员署名 <span>· 角色名“阿岚”改为“阿岚（成年）”</span></div></li>
+          <li><time>11/02</time><div><b>侦探助手·雨夜篇</b> 上线 <span>· 34 分钟 · 角色演绎</span></div></li>
+          <li><time>10/31</time><div><b>摄影指导谈低照度</b> 上线 <span>· 16 分钟 · 幕后访谈</span></div></li>
+          <li><time>10/29</time><div><b>天台的风向标</b> 上线 <span>· 27 分钟 · 附 4 张分镜手稿</span></div></li>
+          <li><time>10/26</time><div><b>午夜三题·合集</b> 分级三项复核 <span>· 第二支语言档由 B 调为 C</span></div></li>
+          <li><time>10/24</time><div><b>午夜三题·合集</b> 上线 <span>· 合计 61 分钟</span></div></li>
+        </ul>
+      </section>
+
+      <section class="section" id="channels">
+        <h2>分类入口：11 个题材频道</h2>
+        <p class="sec-note">频道名取观众实际会搜的类别词，一个条目只归入一个主频道。</p>
+        <div class="channels">
+          <a href="/#pick">都市夜归<small>28 条</small></a>
+          <a href="/#pick">合租故事<small>21 条</small></a>
+          <a href="/#pick">侦探助手<small>18 条</small></a>
+          <a href="/#pick">酒吧老板<small>14 条</small></a>
+          <a href="/#pick">雨天场景<small>16 条</small></a>
+          <a href="/#pick">旧公寓<small>12 条</small></a>
+          <a href="/#pick">长镜头实验<small>9 条</small></a>
+          <a href="/#pick">双人对白<small>23 条</small></a>
+          <a href="/#pick">夜间公路<small>11 条</small></a>
+          <a href="/#pick">幕后访谈<small>17 条</small></a>
+          <a href="/#pick">分镜手稿<small>7 条</small></a>
+        </div>
+      </section>
+
+      <section class="section" id="deep">
+        <h2>深度解析：时长区间标注比精确秒数更有用</h2>
+        <div class="article">
+          <p>186 条记录里，标了精确秒数的只有 12 条，其余全部给区间。这个选择不是偷懒：同一合集内的分集长度差普遍在 5 到 8 分钟之间，给一个精确数字，观众反而会在第三支时发现对不上。</p>
+
+          <h3>先把“分集”和“单集”的边界说清</h3>
+          <p>《午夜三题·合集》10 月 24 日上线时，三支短片分别标为 21 分钟、19 分钟、21 分钟，合计 61 分钟，说明里写的是“约 61 分钟”。《雨天集合》在 11 月 5 日补入第四支后，总时长从 44 分钟改为 58 分钟，单集标注则保留“18—22 分钟”区间。两次修改留下同一个痕迹：合集总时长可以精确，单集只给区间。</p>
+          <p>规则依据是拆分时机。30 分钟内、场景连续的分集归入同一合集；跨场景且人物线独立的直接拆成单集。前者在成片后才决定保留哪几支，长度天然浮动，后者一次成型，秒数反而稳定。</p>
+
+          <h3>一个可核对的说法差异</h3>
+          <p>《侦探助手·雨夜篇》11 月 2 日上线时，条目页头部演员署名为“阿岚”，片尾演职员表写“阿岚（成年）”。11 月 3 日修正时，两处统一为后者。这里可以对照：头部信息在剪辑完成当天录入，片尾在成片后补录，补录那一次通常更准。类似修正本季度共 4 次，全部发生在角色演绎类，剧情短片一次也没有。</p>
+          <table>
+            <caption style="caption-side:bottom;font-size:13px;color:var(--muted);padding-top:6px">2026 年 10 月至 11 月的条目修正记录（可核对项）</caption>
+            <thead><tr><th>修正类型</th><th>次数</th><th>集中在哪类条目</th></tr></thead>
+            <tbody>
+              <tr><td>演员署名统一</td><td>4</td><td>角色演绎</td></tr>
+              <tr><td>分级三项调整</td><td>1</td><td>短片合集</td></tr>
+              <tr><td>总时长更新</td><td>2</td><td>短片合集</td></tr>
+            </tbody>
+          </table>
+
+          <h3>分级三项为什么不该合成一个总分</h3>
+          <p>10 月 26 日复核《午夜三题·合集》，第二支的语言档从 B 调到 C，裸露与暴力不变。如果用一个总分表达，这次调整会被平均掉，观众根本看不出变化在哪一项。三项分开读的实际好处是：想看剧情但不想看裸露的观众，可以直接按第一项筛，不必绕开整片。</p>
+          <div class="factbox"><b>判断：</b>分级三项的拆分，比“限制级 / 普通级”的两分法更贴合实际筛选行为。理由是本季度 5 次分级相关调整中有 4 次只动其中一项，合并成总分后这些信息会消失，观众只能靠猜。</div>
+          <p>这条判断可以被反驳：如果三项之间的相关性很高，拆开只是表面精细。目前能核对的样本是 186 条里有 37 条至少一项为 A 档，其中 22 条另外两项为 B 或 C，相关性并不整齐。样本量小，结论留有余地。</p>
+
+          <h3>访谈条目的边界</h3>
+          <p>17 条幕后访谈全部单列，不与正片合并。10 月 31 日的《摄影指导谈低照度》提到把主光压到 3200K 以下，成片里对应的夜戏段落确实偏暖。访谈与正片互链，不重复剧情。这条规则的意义是：访谈的信息密度高于花絮，混在正片后面会被当成片尾彩蛋跳过。</p>
+          <div class="quote">观众在评论里提过一个反例：有人希望访谈直接接在正片后自动播放。技术上可行，但会让“播放完毕”这个动作失去明确终点，条目页也无法单独统计访谈的观看情况。</div>
+        </div>
+      </section>
+
+      <section class="section" id="guide">
+        <h2>体验指南：从条目页到播放的四步</h2>
+        <ol class="steps">
+          <li><b>先看分级三项。</b>裸露、暴力、语言逐项读，A 档需要成年确认后才显示播放入口，B、C 档直接可播。</li>
+          <li><b>核对时长区间。</b>12—18 分钟的适合一次看完；45 分钟以上的合集建议留整段时间，中途暂停会打乱三支短片的记忆顺序。</li>
+          <li><b>确认演员署名位置。</b>条目页头部与片尾演职员表都应出现；两者不一致时以片尾为准，修正记录会在条目页顶部提示。</li>
+          <li><b>再决定是否看访谈。</b>访谈与正片互链，先看正片再看访谈，谈布光与角色准备的段落才对应得上具体画面。</li>
+        </ol>
+
+        <div class="compare">
+          <div class="panel a">
+            <h4>剧情短片：按场景读</h4>
+            <ul>
+              <li>场景通常三到五个，说明里会列主要场景</li>
+              <li>切分点在小情节结束后，适合分次观看</li>
+              <li>伏笔跨集时，回看上一集末尾两分钟</li>
+            </ul>
+          </div>
+          <div class="panel b">
+            <h4>角色演绎：按系列读</h4>
+            <ul>
+              <li>角色名固定，演员可能轮换，署名两处对照</li>
+              <li>单集独立，跳集观看不影响理解</li>
+              <li>系列内分级三项可能有差异，逐集核对</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <h2>常见问题</h2>
+        <details>
+          <summary>条目为什么标注时长区间，而不是精确到分钟？</summary>
+          <p>短片分 12—18 分钟、25—40 分钟、45 分钟以上三档。同一合集内分集长度常相差 5 到 8 分钟，精确到秒反而误导；合集总时长可以精确，单集只给区间。</p>
+        </details>
+        <details>
+          <summary>角色演绎类短片的演员署名怎么核对？</summary>
+          <p>条目页头部列出演员名与角色名，片尾演职员表再列一次。两处不一致时以片尾为准，因为片尾在成片后录入。本季度 4 次修正都属于这一类。</p>
+        </details>
+        <details>
+          <summary>合集条目的拆分规则是什么？</summary>
+          <p>30 分钟内、场景连续的分集归入同一合集；跨场景且人物线独立的直接拆为单集。合集页只保留索引与总时长，分集各自标时长与分级三项。</p>
+        </details>
+        <details>
+          <summary>幕后访谈为什么不和正片一起播放？</summary>
+          <p>访谈的信息密度高于花絮，混在正片结尾会被当成片尾彩蛋跳过。单列后可以独立统计观看，也方便按“谈布光”“谈角色准备”检索。</p>
+        </details>
+        <details>
+          <summary>分级三项依据什么标准，为什么不给总分？</summary>
+          <p>按裸露、暴力、语言三项各打一档，三项合并给出整体提示。本季度 5 次分级调整里有 4 次只动其中一项，给总分会把这种局部变化平均掉。</p>
+        </details>
+        <details>
+          <summary>成年确认后还需要重新验证吗？</summary>
+          <p>同一浏览器会话内不需要重复确认，换设备或清除本地记录后需重新确认。确认环节只针对 A 档条目，B、C 档不触发。</p>
+        </details>
+      </section>
+
+      <section class="section" id="comments">
+        <h2>观众评论：十条来自具体条目</h2>
+        <div class="cmts">
+          <div class="cmt"><div class="who"><span class="av">陈</span><b>陈默_104</b><span>11/07 · 夜行巴士·第 3 集</span><span class="score">★★★★☆</span></div><p>第 3 集换视角是聪明做法，前两集的伏笔在同一条车厢线上收掉，比硬解释干净。32 分钟没有多余场景。</p></div>
+          <div class="cmt"><div class="who"><span class="av">阿</span><b>阿岚的邻居</b><span>11/05 · 侦探助手·雨夜篇</span><span class="score">★★★☆☆</span></div><p>长镜头那段确实好看，但 11 分钟里有两分钟是空的，摄影在等演员走位。条目页没提这一点。</p></div>
+          <div class="cmt"><div class="who"><span class="av">小</span><b>小满不满</b><span>11/04 · 分级三项</span><span class="score">★★★★☆</span></div><p>三项分开标以后我筛片快了很多，直接跳过裸露 A 档，剧情照样能看。这个改法比笼统标限制级实用。</p></div>
+          <div class="cmt"><div class="who"><span class="av">L</span><b>Lin_夜班</b><span>11/03 · 雨天集合</span><span class="score">★★★☆☆</span></div><p>补的第四支和前三支气质不太一样，总时长从 44 改到 58，条目页更新倒是及时。</p></div>
+          <div class="cmt"><div class="who"><span class="av">老</span><b>老周看片</b><span>11/02 · 午夜三题·合集</span><span class="score">★★★★★</span></div><p>共用旧公寓这个设定撑住了三支。第二支语言档调到 C 是对的，吵架那段用词确实重。</p></div>
+          <div class="cmt"><div class="who"><span class="av">林</span><b>林间小径</b><span>10/31 · 摄影指导谈低照度</span><span class="score">★★★★☆</span></div><p>灯位图和正片画面对得上，不是泛泛谈经验。3200K 那段我拉回去看了两遍。</p></div>
+          <div class="cmt"><div class="who"><span class="av">K</span><b>K_不熬夜</b><span>10/30 · 天台的风向标</span><span class="score">★★☆☆☆</span></div><p>手持跟拍晃得有点晕，删掉的楼梯戏手稿比成片那段有意思，可惜没留。</p></div>
+          <div class="cmt"><div class="who"><span class="av">顾</span><b>顾言</b><span>10/29 · 演员署名</span><span class="score">★★★★☆</span></div><p>头部和片尾不一致的问题终于修了，阿岚那处统一成“（成年）”以后读起来明确多了。</p></div>
+          <div class="cmt"><div class="who"><span class="av">河</span><b>河边的猫</b><span>10/27 · 合集拆分</span><span class="score">★★★☆☆</span></div><p>合集页只有索引没有分集说明，得点进去才知道每支多长，希望索引直接列时长。</p></div>
+          <div class="cmt"><div class="who"><span class="av">七</span><b>七号观众</b><span>10/26 · 分级复核</span><span class="score">★★★★☆</span></div><p>复核把第二支语言档调到 C，说明是真的逐条看过，不是批量套模板。</p></div>
+        </div>
+      </section>
+
+      <section class="section" id="news">
+        <h2>相关资讯：制作与规则层面的四条动态</h2>
+        <ul class="list">
+          <li><time>11/06</time><div><b>车厢内布光方案</b> 在幕后访谈里公开 <span>· 主光 3100K，辅光用两块反光板，不额外加灯</span></div></li>
+          <li><time>11/04</time><div><b>合集索引页改版</b> 讨论中 <span>· 拟在索引直接列分集时长与分级三项，尚未上线</span></div></li>
+          <li><time>11/01</time><div><b>角色演绎系列</b> 确认本季度不再新增角色 <span>· 现有 6 个角色设定维持，演员轮换继续</span></div></li>
+          <li><time>10/28</time><div><b>分镜手稿归档</b> 增加 7 份 <span>· 来自《天台的风向标》与《夜行巴士》前两集</span></div></li>
+        </ul>
+      </section>
+
+      <section class="section" id="timeline">
+        <h2>时间线：从 10 月 24 日到 11 月 7 日</h2>
+        <ul class="tl">
+          <li><time>10/24</time>《午夜三题·合集》上线，三支短片合计 61 分钟。</li>
+          <li><time>10/26</time>分级复核，第二支语言档由 B 调为 C。</li>
+          <li><time>10/29</time>《天台的风向标》上线，附 4 张分镜手稿。</li>
+          <li><time>10/31</time>《摄影指导谈低照度》上线，16 分钟。</li>
+          <li><time>11/02</time>《侦探助手·雨夜篇》上线，34 分钟。</li>
+          <li><time>11/03</time>修正演员署名，头部与片尾统一。</li>
+          <li><time>11/05</time>《雨天集合》补入第四支，总时长改为 58 分钟。</li>
+          <li><time>11/07</time>《夜行巴士·第 3 集》与配套幕后访谈上线。</li>
+        </ul>
+      </section>
+
+      <section class="section" id="rank">
+        <h2>榜单：按条目说明完整度排的五条</h2>
+        <p class="sec-note">排序依据是说明里给出的具体信息量：演员署名、场景列表、分级三项、分镜或访谈链接，四项俱全者在前。</p>
+        <ol class="rank">
+          <li><div><b>午夜三题·合集</b><span>四项俱全，分集各自标时长与分级</span></div></li>
+          <li><div><b>夜行巴士·第 3 集</b><span>四项俱全，另配幕后访谈互链</span></div></li>
+          <li><div><b>天台的风向标</b><span>三项齐全，附 4 张分镜手稿</span></div></li>
+          <li><div><b>侦探助手·雨夜篇</b><span>三项齐全，长镜头段落有单独说明</span></div></li>
+          <li><div><b>摄影指导谈低照度</b><span>访谈条目，灯位图与正片对应</span></div></li>
+        </ol>
+      </section>
+
+      <section class="section" id="tags">
+        <h2>相关推荐标签</h2>
+        <div class="tags-index">
+          <a href="/#pick">都市夜归短片</a>
+          <a href="/#pick">侦探助手系列</a>
+          <a href="/#pick">旧公寓合集</a>
+          <a href="/#pick">长镜头实验</a>
+          <a href="/#pick">分镜手稿</a>
+          <a href="/#pick">低照度布光</a>
+          <a href="/#pick">双人对白</a>
+          <a href="/#pick">剧情短片时长区间</a>
+          <a href="/#pick">角色演绎演员署名</a>
+          <a href="/#pick">分级三项</a>
+          <a href="/#pick">幕后访谈</a>
+          <a href="/#pick">雨天场景</a>
+          <a href="/#pick">夜间公路</a>
+        </div>
+      </section>
+
+      <section class="section" id="voices">
+        <h2>创作者证言</h2>
+        <div class="grid g2">
+          <div class="panel a">
+            <h4>摄影 · 沈川</h4>
+            <p>“低照度那场戏我们试了三版，最后把主光压到 3100K，肤色才不飘。成片里能看到的反光板就是全部辅光。”</p>
+          </div>
+          <div class="panel b">
+            <h4>导演 · 罗晴</h4>
+            <p>“合集拆分规则是四个人吵了两小时定下的：场景连续就归一起，人物线独立就拆。后来补第四支，时长浮动也在预料内。”</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <aside aria-label="侧栏">
+      <div class="side-card">
+        <h3>栏目导航</h3>
+        <ul class="side-nav" id="sideNav">
+          <li><a href="/#overview">领域概览</a></li>
+          <li><a href="/#pick">精选内容推荐</a></li>
+          <li><a href="/#latest">最新更新</a></li>
+          <li><a href="/#channels">分类入口</a></li>
+          <li><a href="/#deep">深度解析</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#comments">观众评论</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+          <li><a href="/#rank">榜单</a></li>
+          <li><a href="/#tags">相关推荐标签</a></li>
+        </ul>
+      </div>
+      <div class="side-card">
+        <h3>本周数据</h3>
+        <p class="mini">收录 186 条 · 题材频道 11 个 · 制作团队署名 5 个 · 分级三项 100% 标注 · 条目修正 4 次，全部有更新记录。</p>
+      </div>
+      <div class="side-card">
+        <h3>更正提示</h3>
+        <p class="mini">演员署名与片尾不一致时以片尾演职员表为准，修正会在条目页顶部提示；分级三项调整会在“最新更新”里保留原档位。</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <div class="brand-f">
+        <svg width="22" height="22" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#f2b544"/><path d="M9 8h13v3.6H13v3.2h7v3.6h-7v6h-4z" fill="#1f1a2e"/></svg>
+        艾彩原创vk视频
+      </div>
+      <p>成年观众向原创短片目录，按题材、时长与制作团队归档，条目附分项分级提示与修正记录。</p>
+      <p style="font-size:12.5px;color:#9a90b1">站内条目、演员署名与数据均为示例演示内容，不对应真实作品。更新时间 2026-11-08，对应“最新更新”中的 11/07 记录。</p>
+    </div>
+    <div>
+      <h4>题材频道</h4>
+      <a href="/#channels">都市夜归</a>
+      <a href="/#channels">合租故事</a>
+      <a href="/#channels">侦探助手</a>
+      <a href="/#channels">旧公寓</a>
+      <a href="/#channels">幕后访谈</a>
+    </div>
+    <div>
+      <h4>栏目</h4>
+      <a href="/#pick">精选内容推荐</a>
+      <a href="/#latest">最新更新</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">常见问题</a>
+    </div>
+    <div>
+      <h4>规则与说明</h4>
+      <a href="/#faq">分级三项标准</a>
+      <a href="/#faq">合集拆分规则</a>
+      <a href="/#faq">演员署名核对</a>
+      <a href="/#news">条目修正记录</a>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 艾彩原创vk视频 · 示例目录</span>
+    <span>仅向成年观众展示 · 分级三项：裸露 / 暴力 / 语言</span>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  var menuBtn=document.getElementById('menuBtn');
+  var nav=document.getElementById('nav');
+  if(menuBtn&&nav){
+    menuBtn.addEventListener('click',function(){
+      var open=nav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded',open?'true':'false');
+    });
+    nav.addEventListener('click',function(e){
+      if(e.target.tagName==='A'&&window.innerWidth<=680){
+        nav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+  var q=document.getElementById('q'),form=document.getElementById('searchForm'),msg=document.getElementById('searchMsg');
+  function runSearch(){
+    var kw=(q.value||'').trim();
+    if(!kw){msg.style.display='none';msg.textContent='';return;}
+    var hits=[];
+    document.querySelectorAll('main .card h3, main .list li b, main .rank li b, main summary, main .cmt .who span').forEach(function(n){
+      if(n.textContent.indexOf(kw)>-1){
+        var box=n.closest('.card,.cmt,details,li,.panel');
+        if(box&&hits.indexOf(box)<0)hits.push(box);
+        if(n.tagName==='SUMMARY'){var d=n.closest('details');if(d)d.open=true;}
+      }
+    });
+    msg.style.display='block';
+    if(hits.length===0){
+      msg.textContent='没有找到含“'+kw+'”的条目，试试题材词，如“侦探助手”“旧公寓”“幕后访谈”。';
+    }else{
+      msg.textContent='找到 '+hits.length+' 处相关条目：'+hits.slice(0,3).map(function(b){return (b.querySelector('h3,b')||b).textContent.trim().slice(0,14);}).join('、')+'。';
+    }
+  }
+  if(form){
+    form.addEventListener('submit',function(e){e.preventDefault();runSearch();});
+    document.getElementById('searchBtn').addEventListener('click',function(e){e.preventDefault();runSearch();});
+    q.addEventListener('input',function(){if(!q.value.trim()){msg.style.display='none';}});
+  }
+  var toTop=document.getElementById('toTop');
+  var links=Array.prototype.slice.call(document.querySelectorAll('#sideNav a'));
+  var sections=links.map(function(a){return document.querySelector(a.getAttribute('href').replace('/#','#'));});
+  function onScroll(){
+    if(window.scrollY>420){toTop.classList.add('show');}else{toTop.classList.remove('show');}
+    var pos=window.scrollY+140,idx=-1;
+    sections.forEach(function(s,i){if(s&&s.offsetTop<=pos)idx=i;});
+    links.forEach(function(a,i){a.classList.toggle('active',i===idx);});
+  }
+  toTop.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+  });
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
