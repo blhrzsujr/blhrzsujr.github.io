@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>啊啊好爽轻点在线观看-观影体验指南与片单解析</title>
+<meta name="description" content="啊啊好爽轻点在线观看的观影入口与片单整理，涵盖高清播放、类型划分、设备适配、缓冲排查与观众评论，提供可核对的时间线与体验建议。">
+<meta name="keywords" content="啊啊好爽轻点在线观看">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231c1430'/%3E%3Cpath d='M22 18v28l24-14z' fill='%23ff5f7e'/%3E%3Ccircle cx='46' cy='20' r='5' fill='%23ffd166'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "啊啊好爽轻点在线观看",
+  "inLanguage": "zh-CN",
+  "description": "观影入口与片单整理，涵盖高清播放、类型划分、设备适配、缓冲排查与观众评论。"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "啊啊好爽轻点在线观看的片源为什么会出现清晰度跳变？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "多数情况是自适应码率在切换。播放器会在带宽下降时从 1080P 回落到 720P 甚至 540P，缓冲恢复后再升回。11 月 5 日夜间 21:40 至 22:10，有观众截图显示同一片源在 3 分钟内切换了 4 次码率，属于网络波动而非片源损坏。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "手机端播放竖屏短剧时画面两侧留黑怎么办？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "竖屏短剧画幅比多为 9:16，横屏设备播放时会出现左右黑边。可以在播放器设置里选「填充画面」，代价是上下裁切。11 月 3 日更新的播放器版本把填充开关移到了二级菜单，路径是设置-画面-填充。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "缓存到本地后为什么仍然需要联网校验？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "缓存文件带有有效期标记，常见为 7 天。过期后即使文件在本地，也需要一次轻量联网校验才能续期。10 月 28 日的版本说明里写明离线播放的有效期为 168 小时，超时按钮会变成灰色。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "选集页面的更新时间和实际可播时间差多少？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "选集页显示的是入库时间，实际可播还要经过转码与审核两步。11 月 6 日一部 24 集短剧在 19:00 显示更新，19:12 才可点击，间隔 12 分钟。集数越多，转码排队越久。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "投屏到电视后字幕消失是设备问题吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "多数是字幕烧录在移动端渲染层，投屏协议只传视频流。11 月 1 日的投屏日志显示，外挂字幕在 DLNA 通道下不被传递。改用镜像投屏可以保留字幕，代价是手机屏幕不能熄灭。"
+      }
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --bg:#0f0b18;
+  --bg-soft:#171025;
+  --panel:#1e1530;
+  --panel-2:#26193d;
+  --line:#332450;
+  --text:#ece7f6;
+  --muted:#a99cc4;
+  --dim:#7c6f97;
+  --primary:#ff5f7e;
+  --primary-soft:#ff8fa3;
+  --accent:#ffd166;
+  --accent-2:#7ee0c3;
+  --radius:14px;
+  --radius-sm:9px;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --sticky-offset:112px;
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --sp-1:6px;--sp-2:12px;--sp-3:18px;--sp-4:26px;--sp-5:38px;--sp-6:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);
+  background:
+    radial-gradient(900px 500px at 85% -10%,rgba(255,95,126,.18),transparent 60%),
+    radial-gradient(700px 420px at 5% 10%,rgba(126,224,195,.10),transparent 60%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.75;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* ---------- sticky group ---------- */
+.sticky-group{position:sticky;top:0;z-index:60}
+.announce{
+  background:linear-gradient(90deg,#ff5f7e,#b04cff);
+  color:#fff;
+  font-size:13.5px;
+  letter-spacing:.02em;
+  padding:8px var(--sp-3);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  text-align:center;
+}
+.announce b{background:rgba(0,0,0,.25);padding:1px 8px;border-radius:20px;font-weight:600;font-size:12px;white-space:nowrap}
+.announce a{border-bottom:1px dashed rgba(255,255,255,.7)}
+.site-header{
+  background:rgba(15,11,24,.86);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  padding:10px var(--sp-3);
+  display:flex;align-items:center;gap:var(--sp-3);
+  flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.brand svg{width:38px;height:38px;flex:0 0 auto}
+.brand-text{display:flex;flex-direction:column;line-height:1.2}
+.brand-text strong{font-size:16.5px;letter-spacing:.03em}
+.brand-text span{font-size:11px;color:var(--dim);letter-spacing:.12em}
+.main-nav{display:flex;gap:4px;flex-wrap:wrap;flex:1 1 auto}
+.main-nav a{
+  font-size:13.5px;color:var(--muted);padding:6px 10px;border-radius:20px;
+  transition:background .18s,color .18s;white-space:nowrap;
+}
+.main-nav a:hover{background:var(--panel-2);color:var(--text)}
+.search-wrap{position:relative;flex:0 0 auto}
+.search-wrap input{
+  background:var(--panel);border:1px solid var(--line);color:var(--text);
+  padding:7px 12px;border-radius:20px;font-size:13px;width:170px;font-family:inherit;
+}
+.search-wrap input::placeholder{color:var(--dim)}
+.search-result{
+  position:absolute;top:calc(100% + 8px);right:0;width:260px;
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);
+  box-shadow:var(--shadow);padding:8px;font-size:13px;display:none;
+}
+.search-result.show{display:block}
+.search-result li{padding:6px 8px;border-radius:6px;color:var(--muted)}
+.search-result li:hover{background:var(--panel-2);color:var(--text)}
+.search-result .empty{color:var(--dim)}
+.menu-btn{
+  display:none;background:var(--panel);border:1px solid var(--line);color:var(--text);
+  border-radius:9px;padding:7px 10px;font-size:13px;
+}
+
+/* ---------- hero ---------- */
+.hero{
+  padding:var(--sp-6) var(--sp-3) var(--sp-5);
+  max-width:1180px;margin:0 auto;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:var(--sp-5);align-items:center;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--accent);
+  border:1px solid rgba(255,209,102,.35);padding:4px 12px;border-radius:20px;margin-bottom:var(--sp-3);
+  letter-spacing:.08em;
+}
+.hero-tag i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:block;animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:clamp(30px,4.2vw,46px);line-height:1.22;letter-spacing:.01em;margin-bottom:var(--sp-3)}
+h1 em{font-style:normal;color:var(--primary);position:relative}
+.hero-desc{color:var(--muted);font-size:15.5px;max-width:34em;margin-bottom:var(--sp-4)}
+.hero-desc b{color:var(--accent-2);font-weight:600}
+.hero-actions{display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-bottom:var(--sp-4)}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:24px;
+  font-size:14.5px;font-weight:600;border:1px solid transparent;transition:transform .16s,background .18s;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(135deg,var(--primary),#c04bff);color:#fff;box-shadow:0 8px 24px rgba(255,95,126,.32)}
+.btn-ghost{border-color:var(--line);color:var(--text);background:var(--panel)}
+.hero-stats{display:flex;gap:var(--sp-4);flex-wrap:wrap}
+.hero-stats div{font-size:12.5px;color:var(--dim)}
+.hero-stats strong{display:block;font-size:22px;color:var(--text);font-weight:700;letter-spacing:.02em}
+.hero-visual{position:relative;aspect-ratio:4/3;min-height:280px}
+.screen{
+  position:absolute;inset:0;border-radius:22px;overflow:hidden;
+  background:linear-gradient(160deg,#2a1a44,#140c22 60%,#1c1030);
+  border:1px solid var(--line);box-shadow:var(--shadow);
+}
+.screen svg{width:100%;height:100%;display:block}
+.play-badge{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:64px;height:64px;border-radius:50%;background:rgba(255,95,126,.92);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 10px rgba(255,95,126,.14);
+}
+.play-badge::after{content:"";border-left:20px solid #fff;border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:5px}
+.chip-float{
+  position:absolute;background:var(--panel);border:1px solid var(--line);border-radius:20px;
+  padding:5px 13px;font-size:12px;color:var(--muted);box-shadow:var(--shadow);white-space:nowrap;
+}
+.chip-float b{color:var(--accent-2)}
+.chip-a{top:6%;right:-4%}
+.chip-b{bottom:9%;left:-3%}
+.chip-c{bottom:-4%;right:14%}
+
+/* ---------- layout ---------- */
+.layout{
+  max-width:1180px;margin:0 auto;padding:0 var(--sp-3) var(--sp-6);
+  display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:var(--sp-4);
+  align-items:start;
+}
+main{min-width:0}
+section[id],aside[id],div[id]{scroll-margin-top:var(--sticky-offset)}
+.block{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:var(--sp-4);
+  margin-bottom:var(--sp-4);
+}
+.block-head{display:flex;align-items:baseline;justify-content:space-between;gap:var(--sp-2);margin-bottom:var(--sp-3);flex-wrap:wrap}
+.block-head h2{font-size:20px;letter-spacing:.01em}
+.block-head h2 span{color:var(--primary);font-size:13px;margin-left:8px;font-weight:500;letter-spacing:.1em}
+.block-head .more{font-size:12.5px;color:var(--dim)}
+.block-head .more:hover{color:var(--accent)}
+.lead{color:var(--muted);font-size:14.5px;margin-bottom:var(--sp-3)}
+.lead b{color:var(--text);font-weight:600}
+
+/* ---------- overview ---------- */
+.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2)}
+.ov-item{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:var(--sp-3)}
+.ov-item h3{font-size:14.5px;margin-bottom:6px}
+.ov-item p{font-size:13px;color:var(--muted)}
+.ov-item .num{font-size:12px;color:var(--accent);margin-bottom:4px;letter-spacing:.1em}
+
+/* ---------- recommend cards ---------- */
+.card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-2)}
+.card{
+  background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);
+  overflow:hidden;transition:transform .16s,border-color .18s;display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-3px);border-color:rgba(255,95,126,.5)}
+.card .thumb{aspect-ratio:16/10;overflow:hidden;background:#241738}
+.card .thumb img{width:100%;height:100%;object-fit:cover}
+.card .body{padding:var(--sp-2);display:flex;flex-direction:column;gap:6px;flex:1}
+.card h3{font-size:14.5px;line-height:1.45}
+.card p{font-size:12.5px;color:var(--muted);flex:1}
+.card .meta{font-size:11.5px;color:var(--dim);display:flex;gap:10px;flex-wrap:wrap}
+.card .meta b{color:var(--accent-2);font-weight:600}
+
+/* ---------- latest list ---------- */
+.news-list{border-top:1px solid var(--line)}
+.news-list li{
+  display:grid;grid-template-columns:auto 1fr auto;gap:var(--sp-2);
+  padding:11px 0;border-bottom:1px solid var(--line);align-items:baseline;font-size:14px;
+}
+.news-list .tag{font-size:11px;color:var(--accent);border:1px solid rgba(255,209,102,.35);border-radius:5px;padding:1px 7px;white-space:nowrap}
+.news-list .time{font-size:12px;color:var(--dim);white-space:nowrap}
+.news-list a{color:var(--text)}
+.news-list a:hover{color:var(--primary-soft)}
+.news-list span.desc{color:var(--muted);font-size:12.5px;display:block;margin-top:2px}
+
+/* ---------- channels ---------- */
+.channel-index{display:flex;flex-wrap:wrap;gap:8px}
+.channel-index a{
+  font-size:13px;padding:7px 14px;border-radius:20px;background:var(--bg-soft);
+  border:1px solid var(--line);color:var(--muted);transition:.18s;
+}
+.channel-index a:hover{border-color:var(--primary);color:var(--text);background:var(--panel-2)}
+.channel-index a b{color:var(--accent-2);font-weight:600;margin-left:5px;font-size:11.5px}
+
+/* ---------- deep analysis ---------- */
+.article h3{font-size:16.5px;margin:var(--sp-4) 0 var(--sp-2);color:var(--text)}
+.article h3::before{content:"▍";color:var(--primary);margin-right:6px}
+.article p{font-size:14.5px;color:#d6cfe6;margin-bottom:var(--sp-2)}
+.article p b{color:var(--accent-2)}
+.article .quote{
+  border-left:3px solid var(--primary);background:var(--bg-soft);
+  padding:var(--sp-3);border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  font-size:14px;color:var(--muted);margin:var(--sp-3) 0;
+}
+.article .quote b{color:var(--text)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2);margin:var(--sp-3) 0}
+.compare .panel{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:var(--sp-3)}
+.compare h4{font-size:13.5px;margin-bottom:8px;color:var(--accent)}
+.compare ul li{font-size:13px;color:var(--muted);padding:4px 0;border-bottom:1px dashed var(--line)}
+.compare ul li:last-child{border-bottom:none}
+.checklist{background:var(--bg-soft);border:1px dashed var(--line);border-radius:var(--radius-sm);padding:var(--sp-3);margin:var(--sp-3) 0}
+.checklist h4{font-size:13.5px;color:var(--accent-2);margin-bottom:8px}
+.checklist li{font-size:13.5px;color:var(--muted);padding:5px 0 5px 20px;position:relative}
+.checklist li::before{content:"✓";position:absolute;left:0;color:var(--accent-2)}
+
+/* ---------- steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-2);counter-reset:step}
+.step{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:var(--sp-3);counter-increment:step;position:relative}
+.step::before{
+  content:counter(step);position:absolute;top:-12px;left:14px;width:26px;height:26px;border-radius:50%;
+  background:var(--primary);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;
+}
+.step h3{font-size:14px;margin:10px 0 6px}
+.step p{font-size:12.5px;color:var(--muted)}
+
+/* ---------- faq ---------- */
+details.faq{border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:8px;background:var(--bg-soft);overflow:hidden}
+details.faq summary{
+  padding:12px var(--sp-3);font-size:14px;cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+";color:var(--primary);font-size:18px;line-height:1;transition:transform .2s}
+details.faq[open] summary::after{transform:rotate(45deg)}
+details.faq .faq-body{padding:0 var(--sp-3) var(--sp-3);font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+details.faq .faq-body b{color:var(--text)}
+
+/* ---------- comments ---------- */
+.comments{display:grid;gap:var(--sp-2)}
+.comment{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:var(--sp-2) var(--sp-3)}
+.comment .who{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--dim);margin-bottom:6px}
+.avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#7b4bff);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:600;flex:0 0 auto}
+.comment p{font-size:13.5px;color:#d3cbe4}
+.comment p b{color:var(--accent)}
+.comment .stars{color:var(--accent);font-size:12px;margin-left:auto}
+
+/* ---------- news ---------- */
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2)}
+.news-item{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:var(--sp-2) var(--sp-3)}
+.news-item h3{font-size:14px;margin-bottom:5px}
+.news-item p{font-size:12.5px;color:var(--muted)}
+.news-item .src{font-size:11.5px;color:var(--dim);margin-top:6px;display:block}
+
+/* ---------- tags ---------- */
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags a{font-size:12.5px;padding:5px 12px;border-radius:6px;background:var(--bg-soft);border:1px solid var(--line);color:var(--muted)}
+.tags a:hover{color:var(--accent);border-color:rgba(255,209,102,.4)}
+
+/* ---------- timeline ---------- */
+.timeline{position:relative;padding-left:22px}
+.timeline::before{content:"";position:absolute;left:5px;top:4px;bottom:4px;width:2px;background:var(--line)}
+.timeline li{position:relative;padding:0 0 var(--sp-3) 8px}
+.timeline li::before{content:"";position:absolute;left:-21px;top:7px;width:10px;height:10px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 3px rgba(255,95,126,.18)}
+.timeline time{font-size:12px;color:var(--accent);display:block;margin-bottom:3px}
+.timeline p{font-size:13.5px;color:var(--muted)}
+.timeline p b{color:var(--text)}
+
+/* ---------- aside ---------- */
+aside{position:sticky;top:var(--sticky-offset);display:flex;flex-direction:column;gap:var(--sp-3)}
+.side-block{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:var(--sp-3)}
+.side-block h2{font-size:15px;margin-bottom:var(--sp-2)}
+.side-nav a{display:block;font-size:13.5px;color:var(--muted);padding:6px 10px;border-radius:6px;border-left:2px solid transparent;transition:.16s}
+.side-nav a:hover{color:var(--text);background:var(--bg-soft)}
+.side-nav a.active{color:var(--primary-soft);border-left-color:var(--primary);background:var(--bg-soft)}
+.rank-list li{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px;align-items:baseline}
+.rank-list li:last-child{border-bottom:none}
+.rank-list .no{color:var(--primary);font-weight:700;width:18px;flex:0 0 auto;font-size:13px}
+.rank-list .no.top{color:var(--accent)}
+.rank-list a{color:var(--muted)}
+.rank-list a:hover{color:var(--text)}
+.rank-list .v{color:var(--dim);font-size:11.5px;margin-left:auto;white-space:nowrap}
+.side-note{font-size:12.5px;color:var(--dim);line-height:1.7}
+.side-note b{color:var(--accent-2)}
+
+/* ---------- footer ---------- */
+footer{
+  border-top:1px solid var(--line);background:var(--bg-soft);
+  padding:var(--sp-5) var(--sp-3) var(--sp-4);
+}
+.foot-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:var(--sp-4)}
+.foot-brand{display:flex;align-items:center;gap:10px;margin-bottom:var(--sp-2)}
+.foot-brand svg{width:36px;height:36px}
+.foot-brand strong{font-size:16px}
+.foot-desc{font-size:13px;color:var(--muted);max-width:30em}
+.foot-col h3{font-size:13.5px;margin-bottom:10px;color:var(--text)}
+.foot-col a,.foot-col li{font-size:12.5px;color:var(--dim);padding:3px 0;display:block}
+.foot-col a:hover{color:var(--accent)}
+.foot-bottom{
+  max-width:1180px;margin:var(--sp-4) auto 0;padding-top:var(--sp-3);
+  border-top:1px solid var(--line);font-size:12px;color:var(--dim);
+  display:flex;justify-content:space-between;gap:var(--sp-2);flex-wrap:wrap;
+}
+.foot-bottom b{color:var(--accent-2);font-weight:600}
+
+/* ---------- to top ---------- */
+.to-top{
+  position:fixed;right:18px;bottom:22px;z-index:70;
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--line);
+  background:var(--panel-2);color:var(--text);font-size:18px;
+  display:none;align-items:center;justify-content:center;box-shadow:var(--shadow);
+}
+.to-top.show{display:flex}
+.to-top:hover{background:var(--primary);border-color:var(--primary);color:#fff}
+
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static;order:2}
+  .hero{grid-template-columns:1fr;gap:var(--sp-4)}
+  .hero-visual{min-height:240px;max-width:520px}
+  .card-grid{grid-template-columns:repeat(2,1fr)}
+  .overview-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .foot-inner{grid-template-columns:1fr 1fr}
+  .main-nav{display:none}
+  .main-nav.open{display:flex;flex:1 1 100%;padding-top:6px}
+  .menu-btn{display:inline-block;margin-left:auto}
+  .chip-a{right:0}
+  .chip-b{left:0}
+}
+@media (max-width:640px){
+  body{font-size:15.5px}
+  .hero{padding-top:var(--sp-5)}
+  .card-grid{grid-template-columns:1fr}
+  .overview-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .news-grid{grid-template-columns:1fr}
+  .compare{grid-template-columns:1fr}
+  .foot-inner{grid-template-columns:1fr}
+  .search-wrap input{width:130px}
+  .hero-stats{gap:var(--sp-3)}
+  .chip-c{right:4%}
+  .announce{font-size:12px;gap:6px}
+  .announce .hide-sm{display:none}
+  .to-top{right:12px;bottom:14px;width:40px;height:40px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .btn:hover,.card:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="sticky-group">
+  <div class="announce">
+    <b>更新</b>
+    <span>11 月 7 日 22:10 上线「片单筛选」与「字幕填充开关」，选集页入库时间改为精确到分钟 <a href="/#latest" class="hide-sm">查看更新记录</a></span>
+  </div>
+  <header class="site-header">
+    <a class="brand" href="/#top" aria-label="返回首页">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="15" fill="#1c1430"/>
+        <path d="M23 19v26l22-13z" fill="#ff5f7e"/>
+        <circle cx="46" cy="20" r="5" fill="#ffd166"/>
+        <rect x="12" y="46" width="26" height="4" rx="2" fill="#7ee0c3"/>
+      </svg>
+      <span class="brand-text"><strong>啊啊好爽轻点在线观看</strong><span>片单 · 播放 · 体验</span></span>
+    </a>
+    <nav class="main-nav" id="mainNav" aria-label="主题导航">
+      <a href="/#overview">播放概览</a>
+      <a href="/#picks">精选片单</a>
+      <a href="/#latest">最新更新</a>
+      <a href="/#channels">分类入口</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">观影指南</a>
+      <a href="/#faq">常见问答</a>
+      <a href="/#comments">观众评论</a>
+    </nav>
+    <div class="search-wrap">
+      <input type="search" id="siteSearch" placeholder="搜片名 / 类型 / 标签" aria-label="站内搜索" autocomplete="off">
+      <ul class="search-result" id="searchResult" role="listbox" aria-label="搜索结果"></ul>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">菜单</button>
+  </header>
+</div>
+
+<div class="hero" id="top">
+  <div class="hero-copy">
+    <span class="hero-tag"><i></i>2026 年 11 月片单已整理</span>
+    <h1>啊啊好爽轻点在线观看</h1>
+    <p class="hero-desc">
+      从横屏长剧到竖屏短剧，把「点开就能看」拆成可查的步骤：片源清晰度、选集更新时间、投屏字幕、缓存有效期。
+      本期整理 <b>38 部</b>常看片单与 <b>6 类</b>播放问题排查路径，标出每条的来源与时间。
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/#picks">进入精选片单</a>
+      <a class="btn btn-ghost" href="/#guide">查看播放指南</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>38</strong>本期片单条目</div>
+      <div><strong>6</strong>类播放问题</div>
+      <div><strong>11/07</strong>最近一次片单更新</div>
+    </div>
+  </div>
+  <div class="hero-visual" aria-hidden="true">
+    <div class="screen">
+      <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#3a1f5c"/><stop offset="1" stop-color="#1a0f2b"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ff5f7e"/><stop offset="1" stop-color="#b04cff"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="300" fill="url(#g1)"/>
+        <circle cx="320" cy="60" r="70" fill="#ff5f7e" opacity=".16"/>
+        <circle cx="70" cy="240" r="90" fill="#7ee0c3" opacity=".10"/>
+        <rect x="34" y="44" width="150" height="10" rx="5" fill="#ff8fa3" opacity=".85"/>
+        <rect x="34" y="66" width="104" height="8" rx="4" fill="#7ee0c3" opacity=".6"/>
+        <rect x="34" y="200" width="332" height="6" rx="3" fill="#ffffff" opacity=".14"/>
+        <rect x="34" y="200" width="196" height="6" rx="3" fill="url(#g2)"/>
+        <rect x="34" y="222" width="58" height="22" rx="11" fill="#ff5f7e" opacity=".9"/>
+        <rect x="102" y="222" width="46" height="22" rx="11" fill="#ffffff" opacity=".12"/>
+        <rect x="158" y="222" width="64" height="22" rx="11" fill="#ffffff" opacity=".12"/>
+        <g opacity=".9">
+          <rect x="250" y="104" width="116" height="66" rx="10" fill="#1c1430" stroke="#332450"/>
+          <rect x="262" y="116" width="60" height="7" rx="3.5" fill="#ffd166"/>
+          <rect x="262" y="130" width="90" height="6" rx="3" fill="#a99cc4" opacity=".6"/>
+          <rect x="262" y="143" width="74" height="6" rx="3" fill="#a99cc4" opacity=".4"/>
+        </g>
+      </svg>
+      <span class="play-badge"></span>
+    </div>
+    <span class="chip-float chip-a">1080P · <b>自适应码率</b></span>
+    <span class="chip-float chip-b">字幕填充 <b>已开启</b></span>
+    <span class="chip-float chip-c">缓存 <b>168 小时</b></span>
+  </div>
+</div>
+
+<div class="layout">
+<main>
+
+  <!-- 1 领域概览 -->
+  <section class="block" id="overview">
+    <div class="block-head">
+      <h2>播放概览<span>OVERVIEW</span></h2>
+      <a class="more" href="/#latest">查看更新 →</a>
+    </div>
+    <p class="lead">片源、选集、投屏、缓存四件事，决定了「点开就能看」是否成立。下面四项是本期统计口径，数字采集截至 <b>2026 年 11 月 7 日</b>。</p>
+    <div class="overview-grid">
+      <div class="ov-item">
+        <div class="num">01 片源</div>
+        <h3>清晰度分层</h3>
+        <p>38 部片单中，标称 1080P 的有 21 部，720P 及以下 17 部。标称不等于实际，切到全屏后看左上角码率更准。</p>
+      </div>
+      <div class="ov-item">
+        <div class="num">02 选集</div>
+        <h3>更新节奏</h3>
+        <p>短剧常见日更 2—4 集，长剧周更 2 集。选集页显示入库时间，可播时间平均晚 12 分钟。</p>
+      </div>
+      <div class="ov-item">
+        <div class="num">03 设备</div>
+        <h3>投屏与字幕</h3>
+        <p>DLNA 通道不传外挂字幕，镜像投屏保留字幕但手机不能熄屏。两条路各有代价。</p>
+      </div>
+      <div class="ov-item">
+        <div class="num">04 缓存</div>
+        <h3>离线有效期</h3>
+        <p>缓存有效期 168 小时，超时需一次轻量联网校验，按钮才会恢复可点状态。</p>
+      </div>
+      <div class="ov-item">
+        <div class="num">05 画幅</div>
+        <h3>竖屏与横屏</h3>
+        <p>竖屏短剧画幅 9:16，横屏设备播放留黑边，填充模式会裁切上下 12%—18% 画面。</p>
+      </div>
+      <div class="ov-item">
+        <div class="num">06 检索</div>
+        <h3>标签体系</h3>
+        <p>片单按题材、时长、画幅三层标签归档，站内搜索支持片名与标签，不识别同义改写。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 精选推荐 -->
+  <section class="block" id="picks">
+    <div class="block-head">
+      <h2>精选片单推荐<span>本期 6 部</span></h2>
+      <a class="more" href="/#channels">按分类浏览 →</a>
+    </div>
+    <p class="lead">按「一次能看完」和「需要缓一缓」分组。评分来自 11 月 1 日至 7 日的站内打分，样本量写在条目里。</p>
+    <div class="card-grid">
+      <article class="card">
+        <div class="thumb"><img src="https://picsum.photos/seed/xxsk-qingdian-01/480/300" width="480" height="300" loading="lazy" alt="夜间城市天台场景，短剧片段取景地"></div>
+        <div class="body">
+          <h3>凌晨两点的天台</h3>
+          <p>24 集竖屏短剧，单集 3 分 40 秒。第 9 集有一场长镜头，弹幕集中在这里。</p>
+          <div class="meta"><span>★ 8.6</span><span><b>432</b> 人打分</span><span>竖屏</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://picsum.photos/seed/xxsk-qingdian-02/480/300" width="480" height="300" loading="lazy" alt="雨夜街道霓虹灯倒影，横屏长剧画面"></div>
+        <div class="body">
+          <h3>雨线以北</h3>
+          <p>36 集横屏长剧，周更 2 集。第 14 集起启用新调色，暗部层次比前 13 集明显提升。</p>
+          <div class="meta"><span>★ 8.2</span><span><b>617</b> 人打分</span><span>横屏</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://picsum.photos/seed/xxsk-qingdian-03/480/300" width="480" height="300" loading="lazy" alt="居家厨房暖光特写，生活流短片画面"></div>
+        <div class="body">
+          <h3>一碗面的时间</h3>
+          <p>单集 18 分钟的生活流短片，共 3 集。第二集煮面镜头被剪成 70 秒，弹幕争议最多。</p>
+          <div class="meta"><span>★ 9.0</span><span><b>289</b> 人打分</span><span>横屏</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://picsum.photos/seed/xxsk-qingdian-04/480/300" width="480" height="300" loading="lazy" alt="地铁站台人群剪影，剧情短剧画面"></div>
+        <div class="body">
+          <h3>末班车前的三站</h3>
+          <p>16 集竖屏，单集 2 分 50 秒。每集结尾有 5 秒黑屏字幕，第 12 集被观众反馈太长。</p>
+          <div class="meta"><span>★ 7.8</span><span><b>501</b> 人打分</span><span>竖屏</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://picsum.photos/seed/xxsk-qingdian-05/480/300" width="480" height="300" loading="lazy" alt="旧式电影放映机与胶片盘，纪录片画面"></div>
+        <div class="body">
+          <h3>胶片修补师</h3>
+          <p>纪录片，4 集，每集 42 分钟。第 3 集有 9 分钟的修复前后对比，画质差异肉眼可见。</p>
+          <div class="meta"><span>★ 9.2</span><span><b>173</b> 人打分</span><span>横屏</span></div>
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb"><img src="https://picsum.photos/seed/xxsk-qingdian-06/480/300" width="480" height="300" loading="lazy" alt="校园走廊空镜，青春题材短剧画面"></div>
+        <div class="body">
+          <h3>第三排靠窗</h3>
+          <p>20 集竖屏，单集 3 分钟。第 6 集有一处字幕与口型错位 0.4 秒，11 月 4 日已修正。</p>
+          <div class="meta"><span>★ 8.4</span><span><b>366</b> 人打分</span><span>竖屏</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3 最新更新 -->
+  <section class="block" id="latest">
+    <div class="block-head">
+      <h2>最新更新记录<span>按入库时间</span></h2>
+      <a class="more" href="/#news">相关资讯 →</a>
+    </div>
+    <ul class="news-list">
+      <li>
+        <span class="tag">选集</span>
+        <div><a href="/#latest">《雨线以北》第 15 集入库</a><span class="desc">页面显示 21:30 入库，实际可点 21:41；本集片头 12 秒为前情回顾</span></div>
+        <span class="time">今天 21:41</span>
+      </li>
+      <li>
+        <span class="tag">修复</span>
+        <div><a href="/#latest">《第三排靠窗》第 6 集字幕轴修正</a><span class="desc">原错位 0.4 秒，重新压制后时间轴对齐，缓存过的需重新下载</span></div>
+        <span class="time">昨天 19:05</span>
+      </li>
+      <li>
+        <span class="tag">片单</span>
+        <div><a href="/#picks">深夜短剧合辑新增 4 部</a><span class="desc">按「单集 4 分钟以内」筛选，合计 63 集，最短单集 2 分 12 秒</span></div>
+        <span class="time">11-06 16:20</span>
+      </li>
+      <li>
+        <span class="tag">画质</span>
+        <div><a href="/#deep">《凌晨两点的天台》第 9 集转码升级</a><span class="desc">码率从 2.8Mbps 提到 4.2Mbps，文件体积增加约 48%</span></div>
+        <span class="time">11-05 22:10</span>
+      </li>
+      <li>
+        <span class="tag">投屏</span>
+        <div><a href="/#faq">投屏字幕开关从三级菜单提到二级</a><span class="desc">路径改为设置-画面-字幕，镜像与 DLNA 两套逻辑分开说明</span></div>
+        <span class="time">11-03 10:34</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- 4 分类入口 -->
+  <section class="block" id="channels">
+    <div class="block-head">
+      <h2>分类入口<span>12 个频道</span></h2>
+      <a class="more" href="/#tags">全部标签 →</a>
+    </div>
+    <p class="lead">频道名即搜索词。括号内是本频道当前收录的条目数，统计到 11 月 7 日。</p>
+    <div class="channel-index">
+      <a href="/#picks">竖屏短剧<b>14</b></a>
+      <a href="/#picks">横屏长剧<b>9</b></a>
+      <a href="/#picks">单集十分钟内<b>18</b></a>
+      <a href="/#picks">都市情感短剧<b>11</b></a>
+      <a href="/#picks">悬疑反转短剧<b>7</b></a>
+      <a href="/#picks">校园青春短剧<b>6</b></a>
+      <a href="/#picks">纪录片修复<b>4</b></a>
+      <a href="/#picks">生活流短片<b>5</b></a>
+      <a href="/#picks">投屏适配片单<b>12</b></a>
+      <a href="/#picks">离线缓存片单<b>16</b></a>
+      <a href="/#picks">字幕无错位片单<b>22</b></a>
+      <a href="/#picks">高清码率片单<b>21</b></a>
+    </div>
+  </section>
+
+  <!-- 5 深度解析 -->
+  <section class="block" id="deep">
+    <div class="block-head">
+      <h2>深度解析<span>可被反驳的判断</span></h2>
+      <a class="more" href="/#faq">相关问答 →</a>
+    </div>
+    <article class="article">
+      <h3>判断一：短剧的「清晰度」焦虑，八成来自自适应码率而非片源本身</h3>
+      <p>11 月 5 日 21:40 至 22:10，半小时内有观众在《末班车前的三站》第 12 集上记录到 4 次码率切换。截图显示同一帧画面在 1080P、720P、540P 之间来回跳。这不像片源损坏——损坏通常表现为固定区块花屏或整段黑屏，而码率切换是整帧分辨率变化。</p>
+      <div class="compare">
+        <div class="panel">
+          <h4>现象 A：码率跳变</h4>
+          <ul>
+            <li>整帧清晰度变化，无固定区块</li>
+            <li>持续 2—8 秒后恢复</li>
+            <li>进度条可继续拖动</li>
+            <li>常见于晚 20:00—23:00</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h4>现象 B：片源损坏</h4>
+          <ul>
+            <li>固定区块花屏或纯色块</li>
+            <li>整集持续不恢复</li>
+            <li>拖动到同一位置必然复现</li>
+            <li>与时段无关</li>
+          </ul>
+        </div>
+      </div>
+      <p>反过来说，如果你的问题是 B，把清晰度锁死在 1080P 只会让缓冲变长，解决不了花屏。这条判断可以被推翻：若同一片源在第二天上午 10 点复现同样跳变，且其他片子正常，那更可能是该片源的转码档位缺失，而非网络。</p>
+
+      <h3>判断二：选集页的「已更新」不等于「可播放」，12 分钟是常见差值</h3>
+      <p>11 月 6 日《雨线以北》第 15 集，选集页 21:30 显示已更新，实际可点时间 21:41。11 月 2 日另一部 24 集短剧，19:00 显示更新，19:12 可点，间隔同样约 12 分钟。两次都是集数较多、当晚同时上线的片子。</p>
+      <p>转码排队是主要原因。片方提交母带后，系统按集数顺序转码，24 集短剧一次提交 4 集，队列里排在第八位，单集转码约 3 分钟，累计 12 分钟。这个数字会随当晚上线总量浮动，不宜当成固定值。可核对的点是：选集页入库时间精确到分钟后，差值是否稳定在 10—15 分钟区间，一周内取 5 部片统计即可验证。</p>
+
+      <div class="quote">
+        <b>可核对结构：</b>把「能不能看」拆成三个可独立验证的字段——① 入库时间（选集页显示）② 转码完成（播放页能否加载首帧）③ 审核通过（能否跳集播放）。三者任一未过，「已更新」都不成立。11 月 6 日那次，②在 21:36 完成，③在 21:41 完成，卡在审核而非转码。
+      </div>
+
+      <h3>判断三：竖屏短剧的「填充画面」不是免费优化，每边裁掉约 8%</h3>
+      <p>9:16 画幅放进 16:9 屏幕，默认留黑边，画面完整。选填充后，横向铺满，纵向裁切。以一集 1080×1920 的竖屏为例，填充到 1920×1080 时上下各裁约 210 像素，占原高 10.9%。</p>
+      <p>《凌晨两点的天台》第 9 集那场长镜头，人物头顶留白本来就不多，填充后前 3 秒的吊灯被裁掉一半。这不是播放器 bug，是画幅换算的必然结果。想要全画面又不想裁切，只能接受黑边，或者用竖屏设备看。</p>
+
+      <h3>判断四：缓存 168 小时的有效期，卡的是一次联网校验，不是文件过期</h3>
+      <p>10 月 28 日的版本说明写明离线播放有效期 168 小时。超过之后，本地文件仍在，但播放按钮变灰。11 月 1 日有观众反馈「缓存还在却打不开」，实测联网 3 秒后按钮恢复，文件没重新下载，占用空间未变。</p>
+      <p>这条判断的风险在于：如果账号在多台设备登录，校验可能失败并提示重新下载。此时问题不在有效期，而在设备数超限。两个原因的按钮文案不同，一个是「联网校验」，一个是「设备超限」，看文案就能区分。</p>
+
+      <h3>判断五：DLNA 投屏丢字幕，是协议层的取舍，不是设备兼容性差</h3>
+      <p>11 月 1 日的投屏日志显示，外挂字幕在 DLNA 通道下不被传递。换用支持外挂字幕的播放器 App，同一台电视仍然丢字幕——说明问题在协议，不在电视型号。镜像投屏走的是屏幕复制，字幕随画面一起传，因此保留。</p>
+      <p>代价明确：镜像时手机屏幕不能熄灭，耗电增加，且手机上的通知会一起投到电视。要字幕又要省电，目前没有第三条路。这个结论可被新固件推翻，但截至 11 月 7 日没有相反证据。</p>
+    </article>
+  </section>
+
+  <!-- 6 体验指南 -->
+  <section class="block" id="guide">
+    <div class="block-head">
+      <h2>观影体验指南<span>四步排查</span></h2>
+      <a class="more" href="/#faq">更多问题 →</a>
+    </div>
+    <p class="lead">按顺序走一遍，多数播放问题能在 3 分钟内定位。每一步都有可观察的结果，不靠猜。</p>
+    <div class="steps">
+      <div class="step">
+        <h3>先看码率</h3>
+        <p>全屏后看左上角或设置里的当前码率。1080P 应在 3.5Mbps 以上，低于 2Mbps 说明在降档。</p>
+      </div>
+      <div class="step">
+        <h3>再锁清晰度</h3>
+        <p>设置-画面-清晰度选固定档。若缓冲圈频繁出现，回退一档，观察 30 秒。</p>
+      </div>
+      <div class="step">
+        <h3>查选集可播</h3>
+        <p>选中集看按钮是否可点。显示已更新但灰色，等 10—15 分钟或刷新选集页。</p>
+      </div>
+      <div class="step">
+        <h3>最后看缓存</h3>
+        <p>离线打不开先联网 3 秒。文案显示「设备超限」则退出其他设备，不是有效期问题。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 FAQ -->
+  <section class="block" id="faq">
+    <div class="block-head">
+      <h2>常见问答<span>基于近期反馈</span></h2>
+    </div>
+    <details class="faq" open>
+      <summary>片源清晰度为什么会在播放中途跳变？</summary>
+      <div class="faq-body">自适应码率在起作用。带宽下降时从 1080P 回落到 720P 甚至 540P，缓冲恢复后再升回。11 月 5 日 21:40—22:10 有观众记录到 3 分钟内切换 4 次，属于网络波动。若同一位置反复花屏，则是片源问题，两者表现不同。</div>
+    </details>
+    <details class="faq">
+      <summary>手机看竖屏短剧留黑边，填充后画面被裁怎么办？</summary>
+      <div class="faq-body">填充模式会把 9:16 画幅裁成 16:9 显示，上下各裁约 10%。《凌晨两点的天台》第 9 集吊灯被裁掉一半就是例子。不想裁切只能保留黑边，或换竖屏设备观看，没有两全选项。</div>
+    </details>
+    <details class="faq">
+      <summary>缓存文件还在，为什么播放按钮是灰的？</summary>
+      <div class="faq-body">先看按钮文案。写「联网校验」是 168 小时有效期到了，联网 3 秒即可恢复，文件不用重下；写「设备超限」是账号登录设备过多，需退出其他设备。两种原因处理方式完全不同。</div>
+    </details>
+    <details class="faq">
+      <summary>选集页显示已更新，点进去却播放不了？</summary>
+      <div class="faq-body">入库时间不等于可播时间。11 月 6 日《雨线以北》第 15 集，21:30 入库，21:41 才可点，差的 11 分钟用在转码与审核。集数越多，排队越久，24 集短剧一次提交 4 集时差值更明显。</div>
+    </details>
+    <details class="faq">
+      <summary>投屏到电视后字幕消失，是电视不兼容吗？</summary>
+      <div class="faq-body">多数是 DLNA 协议不传外挂字幕，与电视型号无关。11 月 1 日日志确认外挂字幕在该通道下不被传递。改用镜像投屏可保留字幕，但手机不能熄屏，通知也会一起投上去。</div>
+    </details>
+    <details class="faq">
+      <summary>字幕和口型差半拍，需要重新缓存吗？</summary>
+      <div class="faq-body">分两种情况。片方修正字幕轴后重新压制，已缓存的旧文件不会自动更新，需删掉重下。《第三排靠窗》第 6 集 11 月 4 日修正后即属此类；若只是播放器渲染延迟，暂停再播通常恢复，不用重下。</div>
+    </details>
+  </section>
+
+  <!-- 8 用户评论 -->
+  <section class="block" id="comments">
+    <div class="block-head">
+      <h2>观众评论<span>11 月 1—7 日</span></h2>
+      <a class="more" href="/#picks">回看片单 →</a>
+    </div>
+    <div class="comments">
+      <div class="comment">
+        <div class="who"><span class="avatar">晚</span>晚风不渡 <span class="stars">★★★★★</span></div>
+        <p>《一碗面的时间》第二集那个 70 秒煮面镜头，水开的声音一直没断，剪辑点藏得很好。就是结尾字幕滚太快，倒回去看了两遍。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">林</span>林深见鹿 <span class="stars">★★★☆☆</span></div>
+        <p>《末班车前的三站》第 12 集结尾黑屏 5 秒真的太长了，前 11 集只有 2 秒，突然变 5 秒还以为卡了，退出重进两次。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">阿</span>阿柴不吃鱼 <span class="stars">★★★★☆</span></div>
+        <p>清晰度这个事我有话说。晚上九点看《雨线以北》第 15 集，码率跳了三次，白天再看一次都没跳。后来锁 720P 就稳了，画质也没差多少。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">七</span>七号观测员 <span class="stars">★★★★★</span></div>
+        <p>《胶片修补师》第 3 集前后对比那段值回票价。修复前划痕在第 7 分钟，修复后还有淡淡痕迹，没抹干净反而更真实。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">石</span>石板路 <span class="stars">★★☆☆☆</span></div>
+        <p>《第三排靠窗》第 6 集字幕错位我碰到的时候还没修，0.4 秒看着不多，对嘴型就特别难受。修了是修了，但我缓存的版本还是旧的。</p>
+      </div>
+      <div class="comment">
+        <div class="who"><span class="avatar">K</span>Kite_0812 <span class="stars">★★★☆☆</span></div>
+        <p>投屏丢字幕这事折腾了半小时，换了两台电视都一样。后来知道是协议问题，早说啊。镜像投屏能用，但手机发烫。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 相关资讯 -->
+  <section class="block" id="news">
+    <div class="block-head">
+      <h2>相关资讯<span>可追溯来源</span></h2>
+    </div>
+    <div class="news-grid">
+      <div class="news-item">
+        <h3>播放器 11 月 7 日版本调整选集页时间精度</h3>
+        <p>入库时间从「小时」改为「分钟」，用于区分转码排队与审核耗时。同时上线片单筛选。</p>
+        <span class="src">来源：11 月 7 日版本说明 · 22:10</span>
+      </div>
+      <div class="news-item">
+        <h3>《雨线以北》第 14 集起更换调色</h3>
+        <p>暗部层次提升，但部分老设备在 720P 下出现色带。片方在 11 月 2 日评论区回应：后续集数会补一版兼容转码。</p>
+        <span class="src">来源：片方账号 11 月 2 日评论 · 转述</span>
+      </div>
+      <div class="news-item">
+        <h3>离线缓存有效期维持 168 小时不变</h3>
+        <p>11 月 5 日有观众询问是否延长，官方未给延期计划。当前超时后一次联网校验即可恢复。</p>
+        <span class="src">来源：11 月 5 日客服回复 · 事实</span>
+      </div>
+      <div class="news-item">
+        <h3>竖屏短剧填充模式裁切比例被实测</h3>
+        <p>第三方测评账号用 1080×1920 母带实测，填充至 16:9 后上下各裁约 210 像素，占原高 10.9%，与页面说明接近。</p>
+        <span class="src">来源：测评账号 11 月 4 日实测 · 可复核</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 相关推荐标签 -->
+  <section class="block" id="tags">
+    <div class="block-head">
+      <h2>相关推荐<span>按搜索词</span></h2>
+    </div>
+    <div class="tags">
+      <a href="/#picks">竖屏短剧一口气看完</a>
+      <a href="/#picks">单集四分钟短剧</a>
+      <a href="/#picks">投屏不丢字幕的片子</a>
+      <a href="/#picks">离线缓存可看的短剧</a>
+      <a href="/#picks">1080P 码率稳定片单</a>
+      <a href="/#picks">校园青春短剧推荐</a>
+      <a href="/#picks">悬疑反转结局合集</a>
+      <a href="/#picks">纪录片修复前后对比</a>
+      <a href="/#picks">深夜适合看的短片</a>
+      <a href="/#picks">字幕无错位片单</a>
+    </div>
+  </section>
+
+  <!-- 11 时间线 -->
+  <section class="block" id="timeline">
+    <div class="block-head">
+      <h2>播放规则变化时间线<span>10 月 9 日—11 月 7 日</span></h2>
+    </div>
+    <ul class="timeline">
+      <li><time>11-07 22:10</time><p><b>选集页时间精度改到分钟</b>，片单筛选上线，字幕填充开关进二级菜单。</p></li>
+      <li><time>11-05 22:10</time><p>《凌晨两点的天台》第 9 集转码升级，码率 2.8Mbps → 4.2Mbps，体积增加约 48%。</p></li>
+      <li><time>11-04 15:30</time><p><b>《第三排靠窗》第 6 集字幕轴修正</b>，0.4 秒错位归零，缓存旧版不自动更新。</p></li>
+      <li><time>11-03 10:34</time><p>投屏字幕开关从三级菜单提到二级，DLNA 与镜像两套说明分开写。</p></li>
+      <li><time>11-01 09:00</time><p>缓存超时文案改为「联网校验」，与「设备超限」区分，减少误判为文件损坏。</p></li>
+      <li><time>10-28 18:20</time><p><b>离线播放有效期确认为 168 小时</b>，版本说明写明超时需一次轻量校验。</p></li>
+      <li><time>10-09 11:00</time><p>竖屏短剧默认画幅策略调整，横屏设备首播不再自动填充，改为黑边默认。</p></li>
+    </ul>
+  </section>
+
+</main>
+
+<aside aria-label="侧栏">
+  <div class="side-block" id="side-nav">
+    <h2>目录导航</h2>
+    <nav class="side-nav" aria-label="页内导航">
+      <a href="/#overview">播放概览</a>
+      <a href="/#picks">精选片单推荐</a>
+      <a href="/#latest">最新更新记录</a>
+      <a href="/#channels">分类入口</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">观影体验指南</a>
+      <a href="/#faq">常见问答</a>
+      <a href="/#comments">观众评论</a>
+      <a href="/#news">相关资讯</a>
+      <a href="/#tags">相关推荐</a>
+      <a href="/#timeline">规则变化时间线</a>
+    </nav>
+  </div>
+  <div class="side-block">
+    <h2>本周播放榜</h2>
+    <ul class="rank-list">
+      <li><span class="no top">1</span><a href="/#picks">一碗面的时间</a><span class="v">9.0</span></li>
+      <li><span class="no top">2</span><a href="/#picks">胶片修补师</a><span class="v">9.2</span></li>
+      <li><span class="no top">3</span><a href="/#picks">凌晨两点的天台</a><span class="v">8.6</span></li>
+      <li><span class="no">4</span><a href="/#picks">第三排靠窗</a><span class="v">8.4</span></li>
+      <li><span class="no">5</span><a href="/#picks">雨线以北</a><span class="v">8.2</span></li>
+      <li><span class="no">6</span><a href="/#picks">末班车前的三站</a><span class="v">7.8</span></li>
+    </ul>
+  </div>
+  <div class="side-block">
+    <h2>排查提示</h2>
+    <p class="side-note">码率低于 <b>2Mbps</b> 先查网络；同一位置反复花屏查片源；按钮文案是「联网校验」就联网 3 秒，是「设备超限」就退其他设备。</p>
+  </div>
+</aside>
+</div>
+
+<footer>
+  <div class="foot-inner">
+    <div>
+      <div class="foot-brand">
+        <svg viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="15" fill="#1c1430"/>
+          <path d="M23 19v26l22-13z" fill="#ff5f7e"/>
+          <circle cx="46" cy="20" r="5" fill="#ffd166"/>
+          <rect x="12" y="46" width="26" height="4" rx="2" fill="#7ee0c3"/>
+        </svg>
+        <strong>啊啊好爽轻点在线观看</strong>
+      </div>
+      <p class="foot-desc">把点开播放拆成片源、选集、投屏、缓存四条可核对的路径，每条标明来源与时间，便于复现和反驳。</p>
+    </div>
+    <div class="foot-col">
+      <h3>片单频道</h3>
+      <a href="/#picks">竖屏短剧</a>
+      <a href="/#picks">横屏长剧</a>
+      <a href="/#picks">单集十分钟内</a>
+      <a href="/#picks">纪录片修复</a>
+    </div>
+    <div class="foot-col">
+      <h3>播放帮助</h3>
+      <a href="/#guide">四步排查</a>
+      <a href="/#faq">常见问答</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#news">相关资讯</a>
+    </div>
+    <div class="foot-col">
+      <h3>关于条目</h3>
+      <p>片单、评分、评论与时间线均为示例数据，用于演示信息结构，不对应真实片源。评分样本量为示例数值。</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>页面内容更新时间 <b>2026-11-08</b> · 对应更新项：选集时间精度、字幕填充开关、片单筛选</span>
+    <span>© 2026 示例站点 · 条目数据仅作演示</span>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  var input=document.getElementById('siteSearch');
+  var result=document.getElementById('searchResult');
+  var data=[
+    {t:'凌晨两点的天台',k:'竖屏 短剧 24集',h:'/#picks'},
+    {t:'雨线以北',k:'横屏 长剧 周更',h:'/#picks'},
+    {t:'一碗面的时间',k:'生活流 短片 18分钟',h:'/#picks'},
+    {t:'末班车前的三站',k:'竖屏 短剧 黑屏字幕',h:'/#picks'},
+    {t:'胶片修补师',k:'纪录片 修复 42分钟',h:'/#picks'},
+    {t:'第三排靠窗',k:'校园 竖屏 字幕修正',h:'/#picks'},
+    {t:'选集页入库时间',k:'更新 转码 审核',h:'/#faq'},
+    {t:'缓存168小时',k:'离线 校验 设备超限',h:'/#faq'},
+    {t:'投屏字幕',k:'DLNA 镜像 字幕丢失',h:'/#faq'},
+    {t:'填充画面裁切',k:'竖屏 黑边 画幅',h:'/#guide'},
+    {t:'播放入口排查',k:'码率 清晰度 缓冲',h:'/#guide'},
+    {t:'播放规则时间线',k:'版本 10月 11月',h:'/#timeline'}
+  ];
+  function render(q){
+    q=q.trim().toLowerCase();
+    result.innerHTML='';
+    if(!q){result.classList.remove('show');return;}
+    var hits=data.filter(function(d){return d.t.toLowerCase().indexOf(q)>-1||d.k.toLowerCase().indexOf(q)>-1;});
+    if(!hits.length){
+      var li=document.createElement('li');
+      li.className='empty';
+      li.textContent='没有找到与「'+q+'」匹配的片名或标签';
+      result.appendChild(li);
+    }else{
+      hits.slice(0,6).forEach(function(d){
+        var li=document.createElement('li');
+        var a=document.createElement('a');
+        a.href=d.h;a.textContent=d.t+' · '+d.k;
+        li.appendChild(a);result.appendChild(li);
+      });
+    }
+    result.classList.add('show');
+  }
+  input.addEventListener('input',function(){render(this.value);});
+  input.addEventListener('keydown',function(e){if(e.key==='Escape'){input.value='';render('');input.blur();}});
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.search-wrap')) result.classList.remove('show');
+  });
+
+  var menuBtn=document.getElementById('menuBtn');
+  var nav=document.getElementById('mainNav');
+  menuBtn.addEventListener('click',function(){
+    var open=nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded',open?'true':'false');
+  });
+  nav.addEventListener('click',function(e){
+    if(e.target.tagName==='A'&&window.innerWidth<=980){
+      nav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+    }
+  });
+
+  var toTop=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){
+    toTop.classList.toggle('show',window.scrollY>600);
+  },{passive:true});
+  toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+
+  var links=[].slice.call(document.querySelectorAll('.side-nav a'));
+  var targets=links.map(function(a){return document.querySelector(a.getAttribute('href').replace('/#','#'));});
+  function highlight(){
+    var pos=window.scrollY+150,idx=-1;
+    targets.forEach(function(t,i){if(t&&t.offsetTop<=pos)idx=i;});
+    links.forEach(function(a,i){a.classList.toggle('active',i===idx);});
+  }
+  window.addEventListener('scroll',highlight,{passive:true});
+  highlight();
+})();
+</script>
+</body>
+  </html>
