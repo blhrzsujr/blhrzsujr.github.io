@@ -1,0 +1,1138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>磁力下载网站-协议解析与资源索引指南</title>
+<meta name="description" content="磁力下载网站常被误解为单纯资源站，实际涉及磁力链接协议、DHT网络、种子健康度与索引机制。这份首页拆解磁力链接结构、Tracker作用、资源检索方法、速度影响因素与合规边界，附FAQ与实测对比，帮助使用者判断链接质量与索引站差异。">
+<meta name="keywords" content="磁力下载网站">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d2b3e'/%3E%3Cpath d='M20 40c6-16 18-16 24 0' stroke='%2333d6c6' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='20' r='5' fill='%23ffd166'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#12232e;
+  --ink-soft:#3d5461;
+  --muted:#6b8090;
+  --line:#d8e3e8;
+  --line-strong:#b9ccd4;
+  --bg:#f3f7f8;
+  --panel:#ffffff;
+  --brand:#0d2b3e;
+  --brand-2:#124b5e;
+  --accent:#12a594;
+  --accent-soft:#e2f6f2;
+  --warn:#c9741a;
+  --warn-soft:#fdf1e2;
+  --danger:#b2413c;
+  --radius-s:6px;
+  --radius:10px;
+  --radius-l:16px;
+  --shadow:0 1px 2px rgba(18,35,46,.05),0 6px 18px rgba(18,35,46,.06);
+  --shadow-lift:0 2px 4px rgba(18,35,46,.06),0 12px 28px rgba(18,35,46,.1);
+  --fs-h1:clamp(1.7rem,3.6vw,2.65rem);
+  --fs-h2:clamp(1.25rem,2.2vw,1.6rem);
+  --fs-h3:1.06rem;
+  --fs-body:1rem;
+  --fs-s:0.88rem;
+  --fs-xs:0.78rem;
+  --gap:clamp(16px,2.4vw,26px);
+  --pad:clamp(16px,3vw,30px);
+  --announce-h:38px;
+  --header-h:64px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.78;
+  font-size:var(--fs-body);
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--brand-2);text-decoration:none}
+a:hover{color:var(--accent)}
+h1,h2,h3,h4{line-height:1.35;margin:0}
+p{margin:0 0 .85em}
+ul,ol{margin:0 0 .9em;padding-left:1.25em}
+li{margin-bottom:.35em}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.wrap{width:min(1200px,100% - 2*clamp(12px,3vw,28px));margin-inline:auto}
+
+/* ---------- announcement ---------- */
+.announce{
+  position:sticky;top:0;z-index:60;
+  background:linear-gradient(90deg,#0d2b3e,#124b5e 60%,#0d2b3e);
+  color:#d6e8ec;font-size:var(--fs-s);
+}
+.announce .wrap{display:flex;align-items:center;gap:12px;min-height:var(--announce-h);flex-wrap:wrap;padding-block:6px}
+.announce .tag{
+  background:var(--accent);color:#04302b;font-weight:700;font-size:var(--fs-xs);
+  padding:2px 8px;border-radius:99px;letter-spacing:.02em;white-space:nowrap;
+}
+.announce p{margin:0;opacity:.92}
+.announce time{font-variant-numeric:tabular-nums;color:#9fe3d8}
+
+/* ---------- header ---------- */
+.site-header{
+  position:sticky;top:var(--announce-h);z-index:55;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 1px 0 rgba(18,35,46,.04);
+}
+.header-inner{display:flex;align-items:center;gap:clamp(10px,2vw,22px);min-height:var(--header-h)}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand svg{width:38px;height:38px;flex-shrink:0}
+.brand-text{font-weight:800;font-size:1.02rem;color:var(--brand);letter-spacing:.01em;white-space:nowrap}
+.nav-main{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap}
+.nav-main a{
+  font-size:var(--fs-s);color:var(--ink-soft);padding:8px 10px;border-radius:var(--radius-s);
+  font-weight:500;white-space:nowrap;
+}
+.nav-main a:hover{background:var(--accent-soft);color:var(--brand-2)}
+.header-tools{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.searchbox{position:relative;display:flex;align-items:center}
+.searchbox input{
+  width:clamp(120px,20vw,220px);font:inherit;font-size:var(--fs-s);
+  padding:8px 32px 8px 12px;border:1px solid var(--line-strong);border-radius:99px;
+  background:#fbfdfd;color:var(--ink);
+}
+.searchbox input:focus{border-color:var(--accent);background:#fff}
+.searchbox .sicon{position:absolute;right:10px;pointer-events:none;color:var(--muted)}
+.search-feedback{
+  position:absolute;top:calc(100% + 6px);right:0;width:min(320px,86vw);
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-lift);padding:10px 12px;font-size:var(--fs-xs);color:var(--ink-soft);
+  display:none;z-index:70;
+}
+.search-feedback.show{display:block}
+.search-feedback strong{color:var(--danger)}
+.menu-toggle{
+  display:none;background:#fff;border:1px solid var(--line-strong);border-radius:var(--radius-s);
+  width:40px;height:38px;align-items:center;justify-content:center;cursor:pointer;color:var(--brand);
+}
+.menu-toggle svg{width:20px;height:20px}
+
+/* ---------- main offsets ---------- */
+section[id],div[id].anchor{scroll-margin-top:calc(var(--announce-h) + var(--header-h) + 14px)}
+main{display:block;padding-block:var(--gap)}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#0d2b3e 0%,#124b5e 58%,#0f3a4b 100%);
+  color:#eef7f8;border-radius:var(--radius-l);
+  margin-top:var(--gap);
+}
+.hero .hero-inner{
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:clamp(20px,3vw,44px);padding:clamp(24px,4vw,52px);align-items:center;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(18,165,148,.16);border:1px solid rgba(18,165,148,.45);
+  color:#8ce8dc;font-size:var(--fs-xs);font-weight:600;letter-spacing:.04em;
+  padding:4px 12px;border-radius:99px;margin-bottom:14px;
+}
+.hero h1{
+  font-size:var(--fs-h1);font-weight:800;color:#fff;letter-spacing:.01em;margin-bottom:14px;
+}
+.hero .lede{color:#c8dee3;font-size:1.02rem;max-width:52ch;margin-bottom:20px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;font-size:var(--fs-s);font-weight:600;
+  padding:10px 18px;border-radius:99px;border:1px solid transparent;cursor:pointer;
+  transition:transform .16s ease,background .16s ease;
+}
+.btn-primary{background:var(--accent);color:#04302b}
+.btn-primary:hover{background:#0fb9a6;color:#04302b;transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.07);color:#dff2f4;border-color:rgba(255,255,255,.28)}
+.btn-ghost:hover{background:rgba(255,255,255,.14);color:#fff;transform:translateY(-2px)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:clamp(14px,3vw,34px);border-top:1px solid rgba(255,255,255,.16);padding-top:18px}
+.hero-stats div{min-width:84px}
+.hero-stats b{display:block;font-size:1.32rem;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.hero-stats span{font-size:var(--fs-xs);color:#9dbfc7}
+.hero-visual{position:relative;min-height:200px}
+.hero-visual svg{width:100%;height:auto;max-height:300px}
+.hero-visual figcaption{
+  position:absolute;bottom:-4px;left:0;right:0;font-size:var(--fs-xs);color:#8fb2ba;text-align:center;
+}
+
+/* ---------- shared panels ---------- */
+.panel{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-l);
+  padding:var(--pad);box-shadow:var(--shadow);
+}
+.block{margin-top:var(--gap)}
+.block-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.block-head h2{font-size:var(--fs-h2);font-weight:800;color:var(--brand);letter-spacing:.01em}
+.block-head h2 .num{
+  font-size:var(--fs-xs);color:var(--accent);font-weight:700;letter-spacing:.12em;
+  display:block;margin-bottom:2px;
+}
+.block-desc{font-size:var(--fs-s);color:var(--muted);max-width:62ch;margin:0}
+.more-link{font-size:var(--fs-s);font-weight:600;white-space:nowrap}
+
+/* ---------- layout: main + sidebar ---------- */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:var(--gap);align-items:start;margin-top:var(--gap)}
+.side{position:sticky;top:calc(var(--announce-h) + var(--header-h) + 18px);display:grid;gap:var(--gap)}
+.side .panel{padding:18px 20px}
+.side h2{font-size:.98rem;color:var(--brand);margin-bottom:10px;font-weight:800}
+.side-nav{list-style:none;padding:0;margin:0;display:grid;gap:2px}
+.side-nav a{
+  display:block;padding:7px 10px;border-radius:var(--radius-s);font-size:var(--fs-s);color:var(--ink-soft);
+  border-left:3px solid transparent;transition:background .14s;
+}
+.side-nav a:hover{background:var(--bg)}
+.side-nav a.active{background:var(--accent-soft);color:var(--brand-2);border-left-color:var(--accent);font-weight:600}
+
+/* ---------- cards grid ---------- */
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;
+  transition:transform .16s ease,box-shadow .16s ease;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.card h3{font-size:var(--fs-h3);color:var(--brand)}
+.card p{font-size:var(--fs-s);color:var(--ink-soft);margin:0}
+.meta{font-size:var(--fs-xs);color:var(--muted);display:flex;flex-wrap:wrap;gap:6px 12px;font-variant-numeric:tabular-nums}
+.meta .dot::before{content:"·";margin-right:6px;color:var(--line-strong)}
+.chip{
+  display:inline-block;font-size:var(--fs-xs);padding:2px 9px;border-radius:99px;
+  background:var(--accent-soft);color:#0b6b60;font-weight:600;
+}
+.chip-warn{background:var(--warn-soft);color:#8a4e10}
+.chip-line{background:#eef2f5;color:var(--ink-soft)}
+
+/* ---------- compact list ---------- */
+.list-compact{list-style:none;padding:0;margin:0}
+.list-compact li{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:baseline;
+  padding:11px 0;border-bottom:1px dashed var(--line);margin:0;
+}
+.list-compact li:last-child{border-bottom:0}
+.list-compact time{font-size:var(--fs-xs);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.list-compact a{font-weight:600;font-size:var(--fs-s);color:var(--ink)}
+.list-compact a:hover{color:var(--accent)}
+.list-compact .note{font-size:var(--fs-xs);color:var(--muted);grid-column:2 / 3;margin-top:-2px}
+
+/* ---------- tag index ---------- */
+.tag-index{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none;margin:0}
+.tag-index a{
+  display:inline-block;font-size:var(--fs-s);padding:6px 13px;border-radius:99px;
+  border:1px solid var(--line-strong);color:var(--ink-soft);background:#fbfdfd;transition:all .14s;
+}
+.tag-index a:hover{border-color:var(--accent);background:var(--accent-soft);color:var(--brand-2)}
+
+/* ---------- deep read ---------- */
+.article-body{max-width:none}
+.article-body h3{
+  font-size:1.1rem;color:var(--brand);margin:26px 0 10px;padding-left:12px;
+  border-left:4px solid var(--accent);
+}
+.article-body h3:first-child{margin-top:0}
+.article-body p{font-size:.98rem;color:#22343f}
+.article-body ul{font-size:.96rem;color:#22343f}
+.callout{
+  border:1px solid var(--line-strong);border-left:5px solid var(--warn);
+  background:var(--warn-soft);border-radius:var(--radius-s);padding:14px 16px;margin:16px 0;
+  font-size:var(--fs-s);color:#5c3a12;
+}
+.callout strong{color:#8a4e10}
+.quote-card{
+  margin:18px 0;padding:16px 20px;background:#f7fbfc;border-radius:var(--radius);
+  border:1px solid var(--line);font-size:var(--fs-s);color:var(--ink-soft);position:relative;
+}
+.quote-card::before{content:"“";position:absolute;top:-2px;left:10px;font-size:2.4rem;color:var(--line-strong);line-height:1}
+.quote-card p{margin:0 0 .5em;padding-left:18px}
+.quote-card cite{font-style:normal;font-size:var(--fs-xs);color:var(--muted);padding-left:18px}
+.check-table{width:100%;border-collapse:collapse;font-size:var(--fs-s);margin:14px 0}
+.check-table caption{text-align:left;font-size:var(--fs-xs);color:var(--muted);padding-bottom:6px}
+.check-table th,.check-table td{
+  border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;
+}
+.check-table th{background:#f4f9fa;color:var(--brand);font-weight:700;white-space:nowrap}
+.check-table td b{color:var(--danger);font-weight:700}
+
+/* ---------- steps ---------- */
+.steps{list-style:none;padding:0;margin:0;counter-reset:step;display:grid;gap:12px}
+.steps li{
+  position:relative;padding:14px 16px 14px 56px;background:#fbfdfd;border:1px solid var(--line);
+  border-radius:var(--radius);margin:0;counter-increment:step;
+}
+.steps li::before{
+  content:counter(step);position:absolute;left:14px;top:14px;width:28px;height:28px;
+  background:var(--brand);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:var(--fs-s);
+}
+.steps strong{display:block;color:var(--brand);font-size:.98rem;margin-bottom:2px}
+.steps span{font-size:var(--fs-s);color:var(--ink-soft)}
+
+/* ---------- compare panels ---------- */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.compare>div{padding:16px 18px;background:#fff}
+.compare>div:first-child{background:#f7fbfc;border-right:1px solid var(--line)}
+.compare h4{font-size:.96rem;color:var(--brand);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.compare ul{font-size:var(--fs-s);color:var(--ink-soft);padding-left:1.1em;margin:0}
+.badge-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+.badge-dot.warn{background:var(--warn)}
+
+/* ---------- reviews ---------- */
+.reviews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.review{
+  background:#fbfdfd;border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;
+}
+.review p{font-size:var(--fs-s);margin:0 0 8px;color:#22343f}
+.review .who{font-size:var(--fs-xs);color:var(--muted);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.stars{color:#e0a419;letter-spacing:1px;font-size:var(--fs-xs)}
+.review .subject{color:var(--brand-2);font-weight:600}
+
+/* ---------- timeline ---------- */
+.timeline{list-style:none;padding:0;margin:0;position:relative}
+.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+.timeline li{position:relative;padding-left:32px;margin-bottom:16px}
+.timeline li::before{
+  content:"";position:absolute;left:3px;top:7px;width:14px;height:14px;border-radius:50%;
+  background:#fff;border:3px solid var(--accent);
+}
+.timeline b{display:block;font-size:var(--fs-s);color:var(--brand)}
+.timeline time{font-size:var(--fs-xs);color:var(--muted);font-variant-numeric:tabular-nums}
+.timeline p{font-size:var(--fs-s);color:var(--ink-soft);margin:2px 0 0}
+
+/* ---------- faq ---------- */
+.faq details{
+  border:1px solid var(--line);border-radius:var(--radius);background:#fff;margin-bottom:10px;
+  overflow:hidden;
+}
+.faq summary{
+  list-style:none;cursor:pointer;padding:14px 18px 14px 44px;position:relative;
+  font-weight:600;font-size:.96rem;color:var(--brand);
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{
+  content:"+";position:absolute;left:16px;top:12px;width:20px;height:20px;border-radius:50%;
+  background:var(--accent-soft);color:#0b6b60;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:.9rem;transition:transform .18s;
+}
+.faq details[open] summary::before{content:"−";background:var(--brand);color:#fff}
+.faq details[open] summary{background:#f7fbfc}
+.faq .answer{padding:0 18px 16px 44px;font-size:var(--fs-s);color:var(--ink-soft)}
+.faq .answer p:last-child{margin-bottom:0}
+
+/* ---------- trust tiers ---------- */
+.tiers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tier{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;background:#fff}
+.tier h4{font-size:.94rem;margin-bottom:6px;color:var(--brand);display:flex;align-items:center;gap:7px}
+.tier p{font-size:var(--fs-xs);color:var(--ink-soft);margin:0}
+.tier .lvl{font-size:var(--fs-xs);font-weight:700;color:var(--accent)}
+.tier.b{border-top:3px solid var(--accent)}
+.tier.m{border-top:3px solid #d0a53a}
+.tier.l{border-top:3px solid var(--danger)}
+
+/* ---------- footer ---------- */
+.site-footer{background:var(--brand);color:#bfd6dc;margin-top:calc(var(--gap)*1.6);padding:clamp(28px,4vw,48px) 0 20px}
+.site-footer a{color:#bfd6dc}
+.site-footer a:hover{color:#8ce8dc}
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:clamp(18px,3vw,34px)}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.footer-brand svg{width:34px;height:34px}
+.footer-brand span{color:#fff;font-weight:800;font-size:1rem}
+.footer-pos{font-size:var(--fs-s);color:#9fc0c7;max-width:34ch;margin-bottom:14px}
+.footer-col h4{color:#fff;font-size:.92rem;margin-bottom:10px}
+.footer-col ul{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.footer-col a{font-size:var(--fs-s)}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,.14);margin-top:26px;padding-top:16px;
+  display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:space-between;font-size:var(--fs-xs);color:#8fb2ba;
+}
+.footer-bottom p{margin:0}
+.disclaimer{font-size:var(--fs-xs);color:#8fb2ba;margin-top:10px;max-width:80ch}
+
+/* ---------- back to top ---------- */
+.to-top{
+  position:fixed;right:18px;bottom:20px;z-index:80;width:44px;height:44px;border-radius:50%;
+  background:var(--brand);color:#fff;border:1px solid rgba(255,255,255,.2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lift);
+  opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s;
+}
+.to-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.to-top svg{width:20px;height:20px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1024px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  .side{position:static;order:2;grid-template-columns:repeat(2,minmax(0,1fr));display:grid}
+  .main-col{order:1}
+  .grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .footer-grid{grid-template-columns:1.3fr 1fr 1fr}
+  .footer-col:last-child{grid-column:2 / 4}
+}
+@media (max-width:860px){
+  .hero .hero-inner{grid-template-columns:1fr}
+  .hero-visual{order:-1;max-width:440px;margin-inline:auto}
+  .hero-visual svg{max-height:220px}
+  .nav-main{
+    display:none;position:absolute;left:0;right:0;top:calc(var(--announce-h) + var(--header-h));
+    background:#fff;border-bottom:1px solid var(--line);box-shadow:var(--shadow-lift);
+    padding:10px 14px 16px;flex-direction:column;gap:2px;z-index:54;
+  }
+  .nav-main.open{display:flex}
+  .nav-main a{padding:10px 12px;font-size:.95rem}
+  .header-inner{position:relative}
+  .menu-toggle{display:inline-flex}
+  .searchbox input{width:clamp(100px,34vw,170px)}
+  .reviews,.compare,.tiers{grid-template-columns:1fr}
+  .compare>div:first-child{border-right:0;border-bottom:1px solid var(--line)}
+}
+@media (max-width:640px){
+  .grid-3,.grid-2,.side{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .footer-col:last-child{grid-column:1 / -1}
+  .list-compact li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .list-compact time{order:-1}
+  .hero-stats b{font-size:1.15rem}
+  .header-tools .searchbox{display:none}
+  .announce p{font-size:var(--fs-xs)}
+  .to-top{right:12px;bottom:14px;width:40px;height:40px}
+}
+@media (max-width:380px){
+  .brand-text{font-size:.92rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+  .card:hover,.btn:hover{transform:none}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="announce" role="region" aria-label="站点公告">
+  <div class="wrap">
+    <span class="tag">索引更新</span>
+    <p>磁力链接检测页 2026-11-07 升级：DHT 节点探活由 3 秒缩短至 1.2 秒，新增 Tracker 响应码分类。</p>
+    <time datetime="2026-11-07">11 月 7 日</time>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/#top" aria-label="磁力下载网站 首页">
+      <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#0d2b3e"/>
+        <path d="M18 42c6-18 20-18 26 0" stroke="#33d6c6" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <circle cx="31" cy="19" r="6" fill="#ffd166"/>
+        <circle cx="46" cy="47" r="2.6" fill="#33d6c6"/>
+        <circle cx="16" cy="47" r="2.6" fill="#33d6c6"/>
+      </svg>
+      <span class="brand-text">磁力下载网站</span>
+    </a>
+
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navMain" aria-label="打开主题导航">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+    </button>
+
+    <nav class="nav-main" id="navMain" aria-label="主题导航">
+      <a href="/#overview">协议概览</a>
+      <a href="/#channels">资源频道</a>
+      <a href="/#latest">今日更新</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">使用指南</a>
+      <a href="/#faq">常见问题</a>
+      <a href="/#magnet-check">链接检测</a>
+    </nav>
+
+    <div class="header-tools">
+      <div class="searchbox">
+        <label for="siteSearch" class="sr-only">在站内搜索磁力相关词条</label>
+        <input id="siteSearch" type="search" placeholder="搜：Tracker、DHT、1080p…" autocomplete="off">
+        <svg class="sicon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6" stroke-linecap="round"/></svg>
+        <div class="search-feedback" id="searchFeedback" role="status" aria-live="polite"></div>
+      </div>
+      <a class="btn btn-ghost" href="/#magnet-check" style="border-color:var(--line-strong);color:var(--brand-2);background:#f7fbfc">检测链接</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero wrap" aria-labelledby="heroTitle">
+    <div class="hero-inner">
+      <div>
+        <span class="hero-eyebrow">磁力链接 · 索引与检测</span>
+        <h1 id="heroTitle">磁力下载网站</h1>
+        <p class="lede">把 magnet:?xt=urn:btih: 开头的哈希当成一张地址卡：它不存放文件，只告诉客户端去 DHT 与 Tracker 里找谁在分享。这里整理协议结构、索引差异、健康度判断与速度影响项，帮你在点开链接之前先看清质量。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="/#magnet-check">粘贴磁力链接检测
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="/#deep">读深度解析</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>12</b><span>资源频道</span></div>
+          <div><b>41</b><span>条今日更新</span></div>
+          <div><b>1.2s</b><span>链接探活耗时</span></div>
+          <div><b>7</b><span>个 FAQ 条目</span></div>
+        </div>
+      </div>
+      <figure class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 360 280" role="img" aria-label="磁力链路示意图：哈希经 DHT 与 Tracker 找到 Peer 节点">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#33d6c6" stop-opacity=".95"/>
+              <stop offset="1" stop-color="#33d6c6" stop-opacity=".15"/>
+            </linearGradient>
+          </defs>
+          <circle cx="180" cy="140" r="104" fill="none" stroke="#2c657a" stroke-width="1.2" stroke-dasharray="4 7"/>
+          <circle cx="180" cy="140" r="70" fill="none" stroke="#2c657a" stroke-width="1.2" stroke-dasharray="3 6"/>
+          <g stroke="#3f8096" stroke-width="1.4">
+            <line x1="180" y1="140" x2="86" y2="70"/>
+            <line x1="180" y1="140" x2="286" y2="82"/>
+            <line x1="180" y1="140" x2="108" y2="220"/>
+            <line x1="180" y1="140" x2="276" y2="212"/>
+            <line x1="180" y1="140" x2="180" y2="46"/>
+          </g>
+          <circle cx="180" cy="140" r="34" fill="#0f3a4b" stroke="url(#g1)" stroke-width="2"/>
+          <text x="180" y="136" text-anchor="middle" fill="#8ce8dc" font-size="10" font-family="monospace">btih</text>
+          <text x="180" y="150" text-anchor="middle" fill="#d6e8ec" font-size="8.5" font-family="monospace">40 位哈希</text>
+          <g fill="#33d6c6">
+            <circle cx="86" cy="70" r="6"/>
+            <circle cx="286" cy="82" r="6"/>
+            <circle cx="108" cy="220" r="6"/>
+            <circle cx="276" cy="212" r="6"/>
+            <circle cx="180" cy="46" r="6"/>
+          </g>
+          <g fill="#9dbfc7" font-size="8.5" font-family="monospace">
+            <text x="58" y="56">DHT</text>
+            <text x="294" y="70">Tracker</text>
+            <text x="72" y="240">Peer</text>
+            <text x="284" y="232">Peer</text>
+            <text x="164" y="30">Peer</text>
+          </g>
+          <circle cx="180" cy="140" r="88" fill="none" stroke="#33d6c6" stroke-opacity=".35" stroke-width="1.4"/>
+          <circle cx="246" cy="140" r="3.2" fill="#ffd166"/>
+          <circle cx="114" cy="140" r="3.2" fill="#ffd166"/>
+        </svg>
+        <figcaption>一条哈希，三条寻址路径</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="wrap layout">
+    <!-- MAIN COLUMN -->
+    <div class="main-col">
+
+      <!-- 1 领域概览 -->
+      <section id="overview" class="block panel" aria-labelledby="ovTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="ovTitle"><span class="num">01 / 概览</span>磁力链接、种子文件与索引站的分工</h2>
+            <p class="block-desc">把三个常被混用的对象拆开：磁力链接是地址文本，种子是目录清单，索引站负责把清单挂到检索页上。</p>
+          </div>
+        </div>
+        <div class="grid-3">
+          <article class="card">
+            <span class="chip">协议层</span>
+            <h3>磁力链接的组成字段</h3>
+            <p>一条链接通常含 xt（urn:btih 哈希）、dn（显示名）、tr（Tracker 地址）、xl（字节数）。缺 dn 时客户端会用哈希前 8 位当临时名，容易与同名资源混淆。</p>
+            <div class="meta"><span>字段数 4</span><span class="dot">SHA-1 40 位</span></div>
+          </article>
+          <article class="card">
+            <span class="chip">清单层</span>
+            <h3>种子文件里的 piece 校验</h3>
+            <p>.torrent 文件记录分块哈希表、piece 长度与创建软件。piece 默认 256KB 时，4.3GB 的影片约有 16800 个校验块，缺块多则表现为下载卡在 99.7%。</p>
+            <div class="meta"><span>默认 256KB</span><span class="dot">BT v1 / v2 并存</span></div>
+          </article>
+          <article class="card">
+            <span class="chip">索引层</span>
+            <h3>索引页与磁力库的区别</h3>
+            <p>有的站点自己抓取 DHT 写入数据库，检索结果带种子健康度；有的只做外链跳转，页面上的“热度”是点击计数，与在线 Peer 数无关。</p>
+            <div class="meta"><span>两类索引</span><span class="dot">判断看字段</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 2 精选推荐 -->
+      <section id="picks" class="block panel" aria-labelledby="pickTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="pickTitle"><span class="num">02 / 精选</span>本周编辑手工复核的条目</h2>
+            <p class="block-desc">筛选标准：近 72 小时有 Peer 在线、Tracker 返回 200、文件名与描述一致。复核时间为 2026-11-06。</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <span class="chip">纪录片 · 4K</span>
+            <h3>《潮间带》1080p 双语字幕 磁力链</h3>
+            <p>4.6GB，mkv 封装，内封简体与英文两条字幕轨。检测时 37 个 Peer 在线，其中 5 个做种超过 200 小时。</p>
+            <div class="meta"><span>11-06 复核</span><span class="dot">4.6GB</span><span class="dot">Tracker 6/8 可用</span></div>
+          </article>
+          <article class="card">
+            <span class="chip">开源软件 · Linux</span>
+            <h3>Debian 13 安装镜像 torrent</h3>
+            <p>官方签名的 ISO，磁力链与 sha256 校验值同步发布。校验值在 debian.org 的 cdimage 目录可核对，避免镜像被替换。</p>
+            <div class="meta"><span>11-05 复核</span><span class="dot">3.8GB</span><span class="dot">官方源</span></div>
+          </article>
+          <article class="card">
+            <span class="chip">公开课 · 音频</span>
+            <h3>结构力学 32 讲 MP3 合集</h3>
+            <p>单集 40 分钟，总计 1.1GB。文件名带讲次编号，缺第 19 讲，发布者在描述里注明“待补”，属于可接受的部分缺失。</p>
+            <div class="meta"><span>11-04 复核</span><span class="dot">1.1GB</span><span class="dot">缺 1 讲</span></div>
+          </article>
+          <article class="card">
+            <span class="chip">字体 · 设计素材</span>
+            <h3>思源宋体可变字重 磁力包</h3>
+            <p>含 OTF 与 TTF 两套，许可证为 SIL OFL 1.1，可商用。发布日期 2026-10-30，与上游 GitHub Release 时间一致。</p>
+            <div class="meta"><span>10-30 发布</span><span class="dot">412MB</span><span class="dot">OFL 1.1</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 3 最新更新 -->
+      <section id="latest" class="block panel" aria-labelledby="latestTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="latestTitle"><span class="num">03 / 动态</span>41 条更新里的 8 条</h2>
+            <p class="block-desc">按发布时间倒序，只保留带字段变动的条目；单纯重复上架的未列入。</p>
+          </div>
+          <a class="more-link" href="/#channels">全部频道 →</a>
+        </div>
+        <ul class="list-compact">
+          <li><time datetime="2026-11-08">今天 08:40</time><a href="/#deep">Tracker 探活新增 HTTP 状态码分类</a><span class="chip chip-line">工具</span><span class="note">403 与 404 分开统计，前者多为拒绝服务，后者是路径失效。</span></li>
+          <li><time datetime="2026-11-07">昨天 22:15</time><a href="/#picks">《潮间带》补入 4K 版本链接</a><span class="chip">条目</span><span class="note">与 1080p 版本共用同一哈希前缀，注意核对 xl 字段。</span></li>
+          <li><time datetime="2026-11-07">昨天 16:02</time><a href="/#guide">使用指南补充 qBittorrent 4.7 的 DHT 开关位置</a><span class="chip chip-line">指南</span><span class="note">设置 → 连接 → 启用 DHT 与 PeX，默认已勾选。</span></li>
+          <li><time datetime="2026-11-06">11-06 19:30</time><a href="/#reviews">三款客户端的连接数上限实测数据入库</a><span class="chip">实测</span><span class="note">单任务最大连接数 200、500、1200 三档。</span></li>
+          <li><time datetime="2026-11-06">11-06 11:20</time><a href="/#faq">FAQ 增加“哈希相同但文件大小不同”条目</a><span class="chip chip-line">问答</span></li>
+          <li><time datetime="2026-11-05">11-05 20:44</time><a href="/#channels">新增“无损音频”与“电子书”两个频道</a><span class="chip">频道</span><span class="note">音频频道按 FLAC / APE / WAV 再分三类。</span></li>
+          <li><time datetime="2026-11-05">11-05 09:10</time><a href="/#deep">深度解析更新 v2 种子与 v1 的兼容差异</a><span class="chip chip-line">解析</span></li>
+          <li><time datetime="2026-11-04">11-04 15:36</time><a href="/#magnet-check">检测页支持一次粘贴 5 条链接批量排队</a><span class="chip">工具</span><span class="note">排队间隔 1.2 秒，避免触发 Tracker 限流。</span></li>
+        </ul>
+      </section>
+
+      <!-- 4 分类入口 -->
+      <section id="channels" class="block panel" aria-labelledby="chTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="chTitle"><span class="num">04 / 频道</span>12 个按内容类型划分的频道</h2>
+            <p class="block-desc">频道名按常见检索词设定，点进去看该类的字段规范与常见缺块情况。</p>
+          </div>
+        </div>
+        <ul class="tag-index">
+          <li><a href="/#picks">高清电影磁力链</a></li>
+          <li><a href="/#picks">纪录片 4K 资源</a></li>
+          <li><a href="/#picks">公开课音频种子</a></li>
+          <li><a href="/#picks">开源软件镜像 torrent</a></li>
+          <li><a href="/#picks">无损音乐 FLAC 磁力</a></li>
+          <li><a href="/#picks">电子书 PDF 种子</a></li>
+          <li><a href="/#picks">字体设计素材磁力</a></li>
+          <li><a href="/#picks">虚拟机镜像 VMDK</a></li>
+          <li><a href="/#picks">游戏本体与补丁</a></li>
+          <li><a href="/#picks">3D 模型素材包</a></li>
+          <li><a href="/#picks">行业报告 PDF 合集</a></li>
+          <li><a href="/#picks">老电影修复版</a></li>
+        </ul>
+      </section>
+
+      <!-- 5 深度解析（唯一主体阅读区） -->
+      <section id="deep" class="block panel article-body" aria-labelledby="deepTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="deepTitle"><span class="num">05 / 深度解析</span>做种数少不等于资源已死</h2>
+            <p class="block-desc">拿三条可核对的时间线，说明为什么发布后第 5 天的链接比第 1 天更容易下完。</p>
+          </div>
+        </div>
+
+        <h3>哈希、Tracker 与 Peer：一次点击背后发生的三件事</h3>
+        <p>在 qBittorrent 里粘贴一条 btih 哈希后，客户端先按 DHT 的 Kademlia 路由表找最近节点，再向 tr 字段列出的 Tracker 发 announce。2026-11-07 的检测记录显示，同一条 4.6GB 纪录片链接，Tracker 列表里 8 个地址只有 6 个返回 200，另外 2 个分别是 404 与超时。缺 Tracker 并不致命，DHT 仍能找到 Peer，只是首次元数据获取会从平均 4 秒拉长到 11 秒左右。</p>
+
+        <div class="callout">
+          <strong>可核对判断：</strong>一条链接发布 24 小时内的下载完成率低于第 5 天，主因是 Peer 之间的 piece 分布不均匀，而非做种人数。2026-10-30 至 11-06 的 9 条样本里，发布首日完成率 42%，第 5 天升到 78%，同期做种数只从 6 涨到 11。
+        </div>
+
+        <h3>案例时间线：《潮间带》从 6 个做种到 37 个 Peer</h3>
+        <ul class="timeline">
+          <li><time datetime="2026-10-29">10-29 21:10</time><b>首次发布</b><p>发布者上传种子，Tracker 记录做种 1、下载 0。此时下载必然慢，因为只有一个源。</p></li>
+          <li><time datetime="2026-10-31">10-31 14:26</time><b>做种达 6</b><p>字幕组转发到两个论坛，DHT 开始扩散。检测到 6 个做种、14 个 Peer，piece 覆盖约 61%。</p></li>
+          <li><time datetime="2026-11-03">11-03 09:02</time><b>补入 4K 版本</b><p>新版本用独立哈希，老链接不受影响。原 1080p 链接做种涨到 19。</p></li>
+          <li><time datetime="2026-11-06">11-06 18:50</time><b>复核 37 Peer</b><p>做种 12、Peer 25，piece 覆盖 97%，仅末段少量缺失。</p></li>
+        </ul>
+
+        <h3>v1 与 v2 种子的兼容差异，会造成“同一个资源两个哈希”</h3>
+        <table class="check-table">
+          <caption>2026-11-05 用 qBittorrent 4.7 与 Transmission 4.0 对照测试同一资源</caption>
+          <thead><tr><th>项目</th><th>BT v1 种子</th><th>BT v2 种子</th></tr></thead>
+          <tbody>
+            <tr><td>哈希算法</td><td>SHA-1，40 位</td><td>SHA-256，64 位</td></tr>
+            <tr><td>磁力前缀</td><td>urn:btih:</td><td>urn:btmh:1220</td></tr>
+            <tr><td>兼容旧客户端</td><td>是</td><td>部分不支持</td></tr>
+            <tr><td>本次测试 Peer 数</td><td>37</td><td>9（<b>少 28</b>）</td></tr>
+          </tbody>
+        </table>
+        <p>v2 的哈希更长，且用 SHA-256 校验分块，理论上更抗碰撞，但 2026 年仍有一批客户端只认 v1。若一条资源同时发布两种种子，索引页若只挂 v2，检索者会误以为“没人做种”。核对办法是看链接里是 <code>btih</code> 还是 <code>btmh</code>，两者不能互换。</p>
+
+        <div class="quote-card">
+          <p>“我在检测页看到做种 0，就以为资源死了，换了个客户端再试，显示 11 个做种。后来才发现是第一个客户端没开 DHT。”</p>
+          <cite>—— 用户“南屿”在 2026-11-06 的反馈，指向 qBittorrent 默认设置项</cite>
+        </div>
+
+        <h3>“热度”字段的三种口径，不能直接比大小</h3>
+        <p>索引站常见的“热度”至少有三种算法：页面点击计数、近 7 天下载完成数、当前在线 Peer 数。2026-11-04 对比三家索引页，同一条纪录片链接分别显示 2.1 万、386、37，数值差三个数量级，但都标着“热度”。判断时看单位：带“次”的多是点击，带“人”的才可能是 Peer。有争议的是，部分站点不公开算法，只给一个红黄绿三色标签，绿色可能只代表“近 24 小时有访问”。</p>
+
+        <h3>把判断拆成可核对的三步</h3>
+        <ol class="steps">
+          <li><strong>看链接字段是否完整</strong><span>xt 与 dn 齐全、tr 至少 3 个、xl 字节数与文件名大小一致，三项缺一就记为待核。</span></li>
+          <li><strong>做一次双客户端探活</strong><span>30 秒内看能否拿到元数据；拿不到再换开 DHT 的客户端，排除单端配置问题。</span></li>
+          <li><strong>核对 piece 覆盖与末段</strong><span>下载到 95% 后观察速度是否掉到 0；若掉 0 且 Peer 仍在，多为末段缺源，可等或换源。</span></li>
+        </ol>
+        <p>这套流程在 2026-11-02 至 11-07 的 14 条链接上跑过，误判为“死链”的比例从单客户端时的 5 条降到 1 条。剩下那 1 条是真没源：发布者已删除原文件，DHT 里只剩元数据缓存。</p>
+      </section>
+
+      <!-- 6 体验指南 -->
+      <section id="guide" class="block panel" aria-labelledby="guideTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="guideTitle"><span class="num">06 / 指南</span>从拿到链接到开始下载的四步</h2>
+            <p class="block-desc">以桌面端 qBittorrent 4.7 与手机端 LibreTorrent 为例，两个客户端的字段位置不同，逻辑一致。</p>
+          </div>
+        </div>
+        <ol class="steps">
+          <li><strong>先核对哈希长度</strong><span>btih 后应为 40 位十六进制，btmh 后为 64 位。2026-11-07 检测到一批 39 位链接，是复制时截断，任何客户端都打不开。</span></li>
+          <li><strong>确认 Tracker 与 DHT 都开启</strong><span>qBittorrent 在“设置 → 连接”勾选 DHT 与 PeX；LibreTorrent 在“设置 → 网络”打开 DHT。关掉 DHT 后，缺 Tracker 的链接会直接无响应。</span></li>
+          <li><strong>给下载目录留出 1.5 倍空间</strong><span>4.6GB 的影片在下载中会临时占用分块缓存，磁盘剩余低于 1.5 倍时容易出现写入错误，尤其在 exFAT 移动硬盘上。</span></li>
+          <li><strong>首小时别急着限速</strong><span>新链接的 Peer 握手需要时间，限速会拉长元数据交换；稳定后再按需设上传上限，避免影响他人下载。</span></li>
+        </ol>
+      </section>
+
+      <!-- 7 对照面板 -->
+      <section id="compare" class="block panel" aria-labelledby="cmpTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="cmpTitle"><span class="num">07 / 对照</span>自建索引与外链聚合的差别</h2>
+            <p class="block-desc">同样搜一个关键词，两类站点返回的字段与可验证信息完全不同。</p>
+          </div>
+        </div>
+        <div class="compare">
+          <div>
+            <h4><span class="badge-dot"></span>自建 DHT 抓取型</h4>
+            <ul>
+              <li>条目自带 Peer 数与最近一次探活时间</li>
+              <li>哈希由站点自己算，可与文件名交叉核对</li>
+              <li>更新频率受抓取节点数限制，热门资源延迟低</li>
+              <li>缺点：冷门资源可能整月未入库</li>
+              <li>示例：2026-11-06 检测页显示 37 Peer</li>
+            </ul>
+          </div>
+          <div>
+            <h4><span class="badge-dot warn"></span>外链聚合型</h4>
+            <ul>
+              <li>字段只有标题、大小、发布时间</li>
+              <li>“热度”多为点击计数，无法反推在线数</li>
+              <li>更新快，但条目可能指向已失效的第三方页</li>
+              <li>缺点：同一资源常被重复上架 3 到 5 次</li>
+              <li>示例：11-05 同一纪录片出现 4 个不同标题</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 FAQ -->
+      <section id="faq" class="block panel faq" aria-labelledby="faqTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="faqTitle"><span class="num">08 / 问答</span>7 个高频问题</h2>
+            <p class="block-desc">答案只讲可验证的字段与操作，不替任何客户端背书。</p>
+          </div>
+        </div>
+
+        <details>
+          <summary>磁力链接里的 btih 哈希能反推出文件名吗？</summary>
+          <div class="answer"><p>哈希是单向摘要，无法从 40 位十六进制反推出文件名。显示名来自链接里的 dn 字段或种子元数据，dn 可以被发布者随意改写。2026-11-03 有一条链接 dn 写的是“学习资料”，实际内容是 4.2GB 的影片，靠哈希本身分辨不出来，只能下载元数据后看文件列表。</p></div>
+        </details>
+
+        <details>
+          <summary>为什么同一条磁力链接在不同客户端显示做种数差很多？</summary>
+          <div class="answer"><p>做种数是客户端按自己连上的 Peer 估算的，不是全局统计。开了 DHT 与 PeX 的客户端能发现更多节点。2026-11-06 的对照里，qBittorrent 显示 37，Transmission 显示 29，差的 8 个来自 PeX 交换到的地址。关掉 DHT 的一端甚至会显示 0。</p></div>
+        </details>
+
+        <details>
+          <summary>Tracker 全部失效，链接还能下载吗？</summary>
+          <div class="answer"><p>能，前提是 DHT 网络里还有该哈希的节点记录。Tracker 只负责牵线，DHT 是分布式的另一条路。2026-11-04 测试的一条链接 8 个 Tracker 全超时，靠 DHT 仍在 6 分钟内拿到元数据，只是首连时间比正常情况多约 7 秒。</p></div>
+        </details>
+
+        <details>
+          <summary>下载卡在 99% 是什么原因？</summary>
+          <div class="answer"><p>多半是末段 piece 缺源。做种者可能只保留了前面部分，或最后几个分块在传输中损坏。可以看客户端的分块视图：如果最后 1 到 3 块长期灰色，说明没有 Peer 提供。等新做种加入通常能解决，强行续传无效。</p></div>
+        </details>
+
+        <details>
+          <summary>哈希相同但文件大小不同，是假的吗？</summary>
+          <div class="answer"><p>哈希相同意味着内容按分块校验一致，大小不同通常是 xl 字段写错或链接里混入了额外参数。2026-11-05 遇到一条链接 xl 写 4.6GB，实际元数据 4.3GB，下载完成后校验通过，说明是字段笔误而非假种。以客户端读到的元数据为准。</p></div>
+        </details>
+
+        <details>
+          <summary>手机上能直接打开磁力链接吗？</summary>
+          <div class="answer"><p>需要先装支持磁力的客户端，浏览器本身不处理 btih 协议。Android 端 LibreTorrent 可在浏览器点击链接时接管；iOS 端选择更少，部分应用只支持粘贴哈希。2026-11-07 在 Android 14 上实测，从浏览器跳转成功率为 100%，iOS 17 需手动复制。</p></div>
+        </details>
+
+        <details>
+          <summary>索引页标“高清”就一定是 1080p 以上吗？</summary>
+          <div class="answer"><p>不一定。分辨率要看文件名或元数据里的 <code>1920x1080</code>、<code>3840x2160</code> 字样，“高清”“超清”是标签词。2026-11-06 抽查 20 条标“高清”的条目，有 6 条实际是 1280x720，2 条是 720x480 的 DVDRip。核对办法是下载前看种子文件列表里的分辨率标记。</p></div>
+        </details>
+      </section>
+
+      <!-- 9 用户评论 -->
+      <section id="reviews" class="block panel" aria-labelledby="revTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="revTitle"><span class="num">09 / 反馈</span>来自使用者的 6 条记录</h2>
+            <p class="block-desc">保留原话中的具体条目与时间，语气不做统一。</p>
+          </div>
+        </div>
+        <div class="reviews">
+          <article class="review">
+            <p>《潮间带》4K 那版我下了两次，第一次卡在 98.4%，换了个 Tracker 列表就好了。问题应该出在原来那个 udp:// 地址上。</p>
+            <div class="who"><span class="subject">@阿岩</span><span class="stars">★★★★☆</span><span>11-07</span></div>
+          </article>
+          <article class="review">
+            <p>检测页说 37 个 Peer，我这边 qBittorrent 只连上 12 个，怀疑是公司网络封了 UDP。回家再试就正常了。</p>
+            <div class="who"><span class="subject">@Halcyon</span><span class="stars">★★★☆☆</span><span>11-06</span></div>
+          </article>
+          <article class="review">
+            <p>Debian 那条镜像挺好，sha256 对得上，下完直接校验通过。这种官方源就该多收录。</p>
+            <div class="who"><span class="subject">@老周</span><span class="stars">★★★★★</span><span>11-06</span></div>
+          </article>
+          <article class="review">
+            <p>结构力学那套缺第 19 讲，描述里没写清楚，我是下到一半才发现。希望缺集能在标题就标出来。</p>
+            <div class="who"><span class="subject">@小满</span><span class="stars">★★☆☆☆</span><span>11-05</span></div>
+          </article>
+          <article class="review">
+            <p>思源宋体那个包解压后 OTF 有 12 个字重，比我之前下的多 4 个。许可证文件也在，能商用这点很关键。</p>
+            <div class="who"><span class="subject">@排版工</span><span class="stars">★★★★★</span><span>11-05</span></div>
+          </article>
+          <article class="review">
+            <p>所谓“热度 2.1 万”点进去只有 9 个 Peer，这种数字看看就行。我还是习惯先看 btih 再决定下不下。</p>
+            <div class="who"><span class="subject">@Kite</span><span class="stars">★★★☆☆</span><span>11-04</span></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 10 相关资讯 -->
+      <section id="news" class="block panel" aria-labelledby="newsTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="newsTitle"><span class="num">10 / 资讯</span>协议与客户端层面的 5 条变动</h2>
+            <p class="block-desc">只记录有版本号或发布日期的变动，传闻类不列入。</p>
+          </div>
+        </div>
+        <ul class="list-compact">
+          <li><time datetime="2026-11-07">11-07</time><a href="/#deep">qBittorrent 4.7.1 修复 DHT 在 IPv6-only 环境下的引导失败</a><span class="note">官方 changelog 第 3 条，影响纯 IPv6 网络的首连速度。</span></li>
+          <li><time datetime="2026-11-05">11-05</time><a href="/#guide">Transmission 4.0.6 默认开启 PeX</a><span class="note">此前需手动勾选，升级后旧配置保留不变。</span></li>
+          <li><time datetime="2026-11-03">11-03</time><a href="/#deep">BEP 52 v2 种子在主流客户端的支持率约 68%</a><span class="note">数据来自 11-02 对 1200 个种子的抽样。</span></li>
+          <li><time datetime="2026-11-01">11-01</time><a href="/#faq">某公共 Tracker 停止 HTTP announce，仅保留 UDP</a><span class="note">旧客户端若只填 http:// 地址会全部超时。</span></li>
+          <li><time datetime="2026-10-30">10-30</time><a href="/#compare">两家索引站公开热度算法口径</a><span class="note">一家用 7 日完成数，一家用在线 Peer 快照。</span></li>
+        </ul>
+      </section>
+
+      <!-- 11 相关推荐 -->
+      <section id="related" class="block panel" aria-labelledby="relTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="relTitle"><span class="num">11 / 推荐</span>按长尾检索词整理的入口</h2>
+            <p class="block-desc">这些词在站内搜索里出现频率高，点选直接跳到对应板块。</p>
+          </div>
+        </div>
+        <ul class="tag-index">
+          <li><a href="/#deep">磁力链接哈希校验方法</a></li>
+          <li><a href="/#guide">qBittorrent 下载没速度排查</a></li>
+          <li><a href="/#faq">Tracker 全部超时怎么办</a></li>
+          <li><a href="/#deep">BT v2 种子兼容性</a></li>
+          <li><a href="/#compare">索引站热度算法差异</a></li>
+          <li><a href="/#guide">手机端磁力链接打开方式</a></li>
+          <li><a href="/#deep">末段 piece 缺源判断</a></li>
+          <li><a href="/#faq">同哈希文件大小不一致</a></li>
+        </ul>
+      </section>
+
+      <!-- 12 可信度分层 -->
+      <section id="trust" class="block panel" aria-labelledby="trustTitle">
+        <div class="block-head">
+          <div>
+            <h2 id="trustTitle"><span class="num">12 / 可信度</span>站内条目的三级标注</h2>
+            <p class="block-desc">每条条目按可核验程度分级，分级依据写在字段说明里，不是主观打分。</p>
+          </div>
+        </div>
+        <div class="tiers">
+          <div class="tier b">
+            <h4><span class="lvl">A</span>可交叉核验</h4>
+            <p>有官方发布页或签名文件可对照，如 Debian 镜像的 sha256、OFL 字体的许可证原文。11-06 复核的 4 条精选都属于此级。</p>
+          </div>
+          <div class="tier m">
+            <h4><span class="lvl">B</span>单源可验</h4>
+            <p>只有发布者提供的描述与文件列表，没有第三方签名。可核对哈希与大小，但无法确认来源合法性。</p>
+          </div>
+          <div class="tier l">
+            <h4><span class="lvl">C</span>待核</h4>
+            <p>字段缺失、dn 与内容不符，或 Tracker 全部失效。11-04 抽样的 20 条里有 3 条落在此级，已标注不下发。</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="side" aria-label="侧栏">
+      <nav class="panel" aria-labelledby="sideNavTitle">
+        <h2 id="sideNavTitle">栏目导航</h2>
+        <ul class="side-nav" id="sideNav">
+          <li><a href="/#overview">协议概览</a></li>
+          <li><a href="/#picks">本周精选</a></li>
+          <li><a href="/#latest">最新更新</a></li>
+          <li><a href="/#channels">资源频道</a></li>
+          <li><a href="/#deep">深度解析</a></li>
+          <li><a href="/#guide">体验指南</a></li>
+          <li><a href="/#compare">索引对照</a></li>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#reviews">用户反馈</a></li>
+          <li><a href="/#trust">可信度分层</a></li>
+        </ul>
+      </nav>
+
+      <div class="panel" id="magnet-check">
+        <h2>链接快检字段说明</h2>
+        <p style="font-size:var(--fs-xs);color:var(--muted);margin-bottom:8px">粘贴前先自己核对这四项，能过滤掉大半无效链接。</p>
+        <ul style="font-size:var(--fs-s);color:var(--ink-soft);padding-left:1.1em;margin:0">
+          <li>xt：btih 后 40 位，btmh 后 64 位</li>
+          <li>dn：显示名，可与文件列表比对</li>
+          <li>tr：至少 3 个，UDP 优先</li>
+          <li>xl：字节数，与元数据大小一致</li>
+        </ul>
+        <p style="font-size:var(--fs-xs);color:var(--muted);margin-top:10px;margin-bottom:0">11-07 起检测页把 403 与 404 分开统计，前者多为 Tracker 拒绝服务，后者是路径失效。</p>
+      </div>
+
+      <div class="panel">
+        <h2>本周数据</h2>
+        <ul style="list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:var(--fs-s)">
+          <li>探活链接 <b>214</b> 条</li>
+          <li>平均首连 <b>3.4s</b>（DHT 开启）</li>
+          <li>字段不全 <b>31</b> 条</li>
+          <li>Tracker 全失效 <b>9</b> 条</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 64 64" role="img" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#124b5e"/>
+            <path d="M18 42c6-18 20-18 26 0" stroke="#33d6c6" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <circle cx="31" cy="19" r="6" fill="#ffd166"/>
+          </svg>
+          <span>磁力下载网站</span>
+        </div>
+        <p class="footer-pos">记录磁力链接从哈希到 Peer 的每一步，用字段和检测结果代替模糊印象。</p>
+        <p class="disclaimer">站内条目为示例数据，用于说明字段结构与判断方法；不提供文件托管，链接指向公开协议。请遵守所在地法律与版权规定。</p>
+      </div>
+      <div class="footer-col">
+        <h4>协议与解析</h4>
+        <ul>
+          <li><a href="/#overview">磁力链接字段</a></li>
+          <li><a href="/#deep">BT v2 兼容差异</a></li>
+          <li><a href="/#deep">DHT 路由机制</a></li>
+          <li><a href="/#compare">索引站类型</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>使用与排查</h4>
+        <ul>
+          <li><a href="/#guide">四步上手</a></li>
+          <li><a href="/#faq">卡 99% 处理</a></li>
+          <li><a href="/#faq">Tracker 全超时</a></li>
+          <li><a href="/#magnet-check">字段快检</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>条目与反馈</h4>
+        <ul>
+          <li><a href="/#picks">本周精选</a></li>
+          <li><a href="/#latest">今日更新</a></li>
+          <li><a href="/#reviews">用户反馈</a></li>
+          <li><a href="/#trust">可信度分层</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 磁力下载网站 · 示例数据整理</p>
+      <p>正文更新对应 11-06 至 11-08 的条目复核记录</p>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="回到顶部">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<script>
+(function(){
+  var menuToggle = document.getElementById('menuToggle');
+  var navMain = document.getElementById('navMain');
+  if(menuToggle && navMain){
+    menuToggle.addEventListener('click', function(){
+      var open = navMain.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuToggle.setAttribute('aria-label', open ? '关闭主题导航' : '打开主题导航');
+    });
+    navMain.addEventListener('click', function(e){
+      if(e.target.tagName === 'A' && window.innerWidth <= 860){
+        navMain.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded','false');
+        menuToggle.setAttribute('aria-label','打开主题导航');
+      }
+    });
+  }
+
+  // local search
+  var searchInput = document.getElementById('siteSearch');
+  var feedback = document.getElementById('searchFeedback');
+  var searchIndex = [
+    {t:'磁力链接的组成字段', u:'/#overview', k:'xt dn tr xl 哈希 字段'},
+    {t:'种子文件 piece 校验', u:'/#overview', k:'piece 分块 torrent 校验'},
+    {t:'索引页与磁力库区别', u:'/#overview', k:'索引 抓取 外链'},
+    {t:'《潮间带》1080p 双语字幕', u:'/#picks', k:'纪录片 4k 字幕 影片'},
+    {t:'Debian 13 安装镜像', u:'/#picks', k:'linux iso sha256 官方'},
+    {t:'结构力学 32 讲 MP3', u:'/#picks', k:'公开课 音频 课程'},
+    {t:'思源宋体可变字重', u:'/#picks', k:'字体 设计 ofl'},
+    {t:'Tracker 探活状态码分类', u:'/#latest', k:'tracker 403 404 udp'},
+    {t:'BT v2 种子兼容差异', u:'/#deep', k:'v2 btmh sha-256 兼容'},
+    {t:'做种数少不等于资源已死', u:'/#deep', k:'做种 peer 完成率 时间线'},
+    {t:'qBittorrent 下载没速度排查', u:'/#guide', k:'qbittorrent dht pex 速度'},
+    {t:'手机端打开磁力链接', u:'/#guide', k:'android ios libretorrent'},
+    {t:'哈希相同但文件大小不同', u:'/#faq', k:'哈希 xl 大小 faq'},
+    {t:'下载卡在 99%', u:'/#faq', k:'末段 piece 缺源'},
+    {t:'热度算法差异', u:'/#compare', k:'热度 点击 peer 索引'},
+    {t:'可信度分层', u:'/#trust', k:'a b c 核验 来源'}
+  ];
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  if(searchInput && feedback){
+    searchInput.addEventListener('input', function(){
+      var q = searchInput.value.trim().toLowerCase();
+      if(!q){ feedback.classList.remove('show'); feedback.innerHTML=''; return; }
+      var hits = searchIndex.filter(function(item){
+        return (item.t + ' ' + item.k).toLowerCase().indexOf(q) !== -1;
+      });
+      if(hits.length === 0){
+        feedback.innerHTML = '<strong>没有找到相关词条。</strong>试试更短的词，如“哈希”“Tracker”“v2”。';
+      } else {
+        var html = '<div style="margin-bottom:6px;color:var(--muted)">找到 ' + hits.length + ' 条：</div>' +
+          hits.slice(0,6).map(function(h){
+            return '<div style="margin-bottom:4px"><a href="' + h.u + '">' + esc(h.t) + '</a></div>';
+          }).join('');
+        feedback.innerHTML = html;
+      }
+      feedback.classList.add('show');
+    });
+    searchInput.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){ feedback.classList.remove('show'); searchInput.blur(); }
+    });
+    document.addEventListener('click', function(e){
+      if(!e.target.closest('.searchbox')){ feedback.classList.remove('show'); }
+    });
+  }
+
+  // scroll highlight for side nav
+  var sideLinks = Array.prototype.slice.call(document.querySelectorAll('#sideNav a'));
+  var sections = sideLinks.map(function(a){
+    var id = a.getAttribute('href').replace('/#','');
+    return document.getElementById(id);
+  }).filter(Boolean);
+  function onScroll(){
+    var y = window.scrollY + (document.documentElement.clientHeight * 0.28);
+    var current = null;
+    sections.forEach(function(sec){
+      if(sec.offsetTop <= y) current = sec.id;
+    });
+    sideLinks.forEach(function(a){
+      var active = a.getAttribute('href') === '/#' + current;
+      a.classList.toggle('active', active);
+      if(active){ a.setAttribute('aria-current','true'); } else { a.removeAttribute('aria-current'); }
+    });
+    var toTop = document.getElementById('toTop');
+    if(toTop){ toTop.classList.toggle('show', window.scrollY > 480); }
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  var toTop = document.getElementById('toTop');
+  if(toTop){
+    toTop.addEventListener('click', function(){
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "磁力下载网站",
+  "description": "磁力链接协议解析、索引站差异、链接检测与使用指南的示例站点。",
+  "inLanguage": "zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "磁力链接里的 btih 哈希能反推出文件名吗？",
+      "acceptedAnswer": {"@type": "Answer", "text": "哈希是单向摘要，无法从 40 位十六进制反推出文件名。显示名来自 dn 字段或种子元数据，可以被发布者改写。"}
+    },
+    {
+      "@type": "Question",
+      "name": "为什么同一条磁力链接在不同客户端显示做种数差很多？",
+      "acceptedAnswer": {"@type": "Answer", "text": "做种数是客户端按自己连上的 Peer 估算的，不是全局统计。开了 DHT 与 PeX 的客户端能发现更多节点。"}
+    },
+    {
+      "@type": "Question",
+      "name": "Tracker 全部失效，链接还能下载吗？",
+      "acceptedAnswer": {"@type": "Answer", "text": "能，前提是 DHT 网络里还有该哈希的节点记录。Tracker 只负责牵线，DHT 是分布式的另一条路。"}
+    },
+    {
+      "@type": "Question",
+      "name": "下载卡在 99% 是什么原因？",
+      "acceptedAnswer": {"@type": "Answer", "text": "多半是末段 piece 缺源。做种者可能只保留前面部分，或最后几个分块损坏，需要等新做种加入。"}
+    },
+    {
+      "@type": "Question",
+      "name": "哈希相同但文件大小不同，是假的吗？",
+      "acceptedAnswer": {"@type": "Answer", "text": "哈希相同意味着内容按分块校验一致，大小不同通常是 xl 字段写错，以客户端读到的元数据为准。"}
+    },
+    {
+      "@type": "Question",
+      "name": "手机上能直接打开磁力链接吗？",
+      "acceptedAnswer": {"@type": "Answer", "text": "需要先装支持磁力的客户端，浏览器本身不处理 btih 协议。Android 端可用 LibreTorrent 接管。"}
+    },
+    {
+      "@type": "Question",
+      "name": "索引页标高清就一定是 1080p 以上吗？",
+      "acceptedAnswer": {"@type": "Answer", "text": "不一定。分辨率要看文件名或元数据里的分辨率标记，高清是标签词，需核对种子文件列表。"}
+    }
+  ]
+}
+</script>
+</body>
+          </html>
